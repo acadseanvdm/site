@@ -1,5 +1,5 @@
 ---
-title: "Initial Surname"
+title: "Sean van der Merwe"
 comments: false
 image: profile.png
 about:
@@ -10,22 +10,21 @@ about:
   image-shape: round
   links:
     - icon: envelope
-      href: mailto:surname@web.ac.za
+      href: mailto:acad@seanvdm.co.za
     - icon: github
-      href: https://github.com/
+      href: https://github.com/acadseanvdm
     - text: scholar
-      href: https://scholar.google.com/
+      href: https://scholar.google.co.za/citations?user=necKrZkAAAAJ&hl=en
     - text: orcid
-      href: https://orcid.org/
-    - icon: linkedin
-      href: https://www.linkedin.com/
+      href: https://orcid.org/0000-0002-8623-8639
 ---
 
 ::: {#hero-heading}
 
-Initial Surname is from the well-known establishment of the University of Academia in the land of Statistics.
+I am Dr Sean van der Merwe, Academic Department Head of the [Department of Mathematical Statistics and Actuarial Science](https://www.ufs.ac.za/mathstats) at the [University of the Free State](https://www.ufs.ac.za/).
 
-Initial has served on various committees.
+I serve because I’m grateful. I’m grateful for the talents and opportunities given to me and wish to use them optimally, in the service of humanity. Primarily, I am grateful for the salvation granted me by Jesus Christ which fuels my spirit and drives me to give.
 
-Initial is an expert in websites in Quarto.
+I am the coordinator of the internal Statistical Consultation Unit of University of the Free State, South Africa. I also lecture Bayesian Statistics. Married to Catherine Sheares (now vdM). I used to play a lot of computer games and program for fun, now I only play a few games and only program for work (although my work is fun - what a blessing).
+
 :::

@@ -6,18 +6,20 @@ title: "Education"
 
 | Year | Degree | Institution |
 |:-----------------------|:-----------------------|:-----------------------|
-| XXX | PhD | University, Country |
-| XXX | MSc  | University, Country |
-| XXX | XXX | University, Country |
+| 2018 | PhD | University of the Free State, South Africa |
+| 2005 | MCom  | University of the Free State, South Africa |
+| 2004 | BComHons  | University of the Free State, South Africa |
+| 2003 | BCom  | University of the Free State, South Africa |
 
 ## Positions
 
 | Year | Position | Institution |
 |:-----------------------|:-----------------------|:-----------------------|
-| XXX - current | Level | Institution |
-| XXX - XXX | Level | Institution |
-
+| 2025 - current | Academic Department Head | UFS |
+| 2020 - 2024 | Senior Lecturer and coordinator of the UFS Statistical Consultation Unit | UFS |
+| 2007 - 2019 | Lecturer | UFS |
+| 2006 - 2006 | Junior Lecturer | UFS |
 
 ## Awards
 
--   Recipient of the MDAG best website award 2025.
+-   Learning and Teaching award for innovation in assessment, 2022.

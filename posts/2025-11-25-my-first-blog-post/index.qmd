@@ -1,6 +1,6 @@
 ---
-title: "My first blog post"
-author: "Name Surname"
+title: "Example blog post"
+author: "Sean van der Merwe"
 date: '2025-11-25'
 slug: my-first-blog-post
 categories:

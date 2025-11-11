@@ -4,40 +4,40 @@
     "href": "talks.html",
     "title": "Presentations",
     "section": "",
-    "text": "Date\nTitle\nEvent\nLocation\nDetails\nAuthor\n\n\n\n\n2025-11-25\nBest websites in Quarto\nSASA2025\nVanderbijlpark at the Riverside Sun Hotel\nContributed talk\nPresenting author"
+    "text": "Warning: package 'gt' was built under R version 4.5.2\n\n\n\n\n\n\n\n\nDate\nTitle\nEvent\nLocation\nDetails\nAuthor\n\n\n\n\n2025-11-25\nBest websites in Quarto\nSASA2025\nVanderbijlpark at the Riverside Sun Hotel\nContributed talk\nPresenting author"
   },
   {
     "objectID": "talks.html#conferences",
     "href": "talks.html#conferences",
     "title": "Presentations",
     "section": "",
-    "text": "Date\nTitle\nEvent\nLocation\nDetails\nAuthor\n\n\n\n\n2025-11-25\nBest websites in Quarto\nSASA2025\nVanderbijlpark at the Riverside Sun Hotel\nContributed talk\nPresenting author"
+    "text": "Warning: package 'gt' was built under R version 4.5.2\n\n\n\n\n\n\n\n\nDate\nTitle\nEvent\nLocation\nDetails\nAuthor\n\n\n\n\n2025-11-25\nBest websites in Quarto\nSASA2025\nVanderbijlpark at the Riverside Sun Hotel\nContributed talk\nPresenting author"
   },
   {
     "objectID": "posts/2025-11-25-my-first-blog-post/index.html",
     "href": "posts/2025-11-25-my-first-blog-post/index.html",
-    "title": "My first blog post",
+    "title": "Example blog post",
     "section": "",
     "text": "Look at all the impressive skills I have acquired in the MDAG 2025 workshop."
   },
   {
     "objectID": "posts/2025-11-25-my-first-blog-post/index.html#motivation",
     "href": "posts/2025-11-25-my-first-blog-post/index.html#motivation",
-    "title": "My first blog post",
+    "title": "Example blog post",
     "section": "",
     "text": "Look at all the impressive skills I have acquired in the MDAG 2025 workshop."
   },
   {
     "objectID": "posts/2025-11-25-my-first-blog-post/index.html#about-the-example-illustrating-the-classic-iris-data-set-with-biplotez",
     "href": "posts/2025-11-25-my-first-blog-post/index.html#about-the-example-illustrating-the-classic-iris-data-set-with-biplotez",
-    "title": "My first blog post",
+    "title": "Example blog post",
     "section": "About the example: Illustrating the classic iris data set with biplotEZ",
     "text": "About the example: Illustrating the classic iris data set with biplotEZ\n\nlibrary(biplotEZ)\n\nWelcome to biplotEZ! \nThis package is used to construct biplots \nRun ?biplot or vignette() for more information\n\n\n\nAttaching package: 'biplotEZ'\n\n\nThe following object is masked from 'package:stats':\n\n    biplot\n\nbp &lt;- biplot(iris,scale=TRUE) |&gt; \n  PCA(group.aes=iris$Species) |&gt; \n  axes(col=\"black\") |&gt; \n  samples(col=c(\"pink\",\"orange\",\"firebrick3\"),opacity = 0.7) |&gt;\n  plot()"
   },
   {
     "objectID": "posts/2025-11-25-my-first-blog-post/index.html#next",
     "href": "posts/2025-11-25-my-first-blog-post/index.html#next",
-    "title": "My first blog post",
+    "title": "Example blog post",
     "section": "Next",
     "text": "Next\nStay tuned for some new blog posts."
   },
@@ -46,55 +46,55 @@
     "href": "education.html",
     "title": "Education",
     "section": "",
-    "text": "Year\nDegree\nInstitution\n\n\n\n\nXXX\nPhD\nUniversity, Country\n\n\nXXX\nMSc\nUniversity, Country\n\n\nXXX\nXXX\nUniversity, Country"
+    "text": "Year\nDegree\nInstitution\n\n\n\n\n2018\nPhD\nUniversity of the Free State, South Africa\n\n\n2005\nMCom\nUniversity of the Free State, South Africa\n\n\n2004\nBComHons\nUniversity of the Free State, South Africa\n\n\n2003\nBCom\nUniversity of the Free State, South Africa"
   },
   {
     "objectID": "education.html#degrees",
     "href": "education.html#degrees",
     "title": "Education",
     "section": "",
-    "text": "Year\nDegree\nInstitution\n\n\n\n\nXXX\nPhD\nUniversity, Country\n\n\nXXX\nMSc\nUniversity, Country\n\n\nXXX\nXXX\nUniversity, Country"
+    "text": "Year\nDegree\nInstitution\n\n\n\n\n2018\nPhD\nUniversity of the Free State, South Africa\n\n\n2005\nMCom\nUniversity of the Free State, South Africa\n\n\n2004\nBComHons\nUniversity of the Free State, South Africa\n\n\n2003\nBCom\nUniversity of the Free State, South Africa"
   },
   {
     "objectID": "education.html#positions",
     "href": "education.html#positions",
     "title": "Education",
     "section": "Positions",
-    "text": "Positions\n\n\n\n\n\n\n\n\nYear\nPosition\nInstitution\n\n\n\n\nXXX - current\nLevel\nInstitution\n\n\nXXX - XXX\nLevel\nInstitution"
+    "text": "Positions\n\n\n\n\n\n\n\n\nYear\nPosition\nInstitution\n\n\n\n\n2025 - current\nAcademic Department Head\nUFS\n\n\n2020 - 2024\nSenior Lecturer and coordinator of the UFS Statistical Consultation Unit\nUFS\n\n\n2007 - 2019\nLecturer\nUFS\n\n\n2006 - 2006\nJunior Lecturer\nUFS"
   },
   {
     "objectID": "education.html#awards",
     "href": "education.html#awards",
     "title": "Education",
     "section": "Awards",
-    "text": "Awards\n\nRecipient of the MDAG best website award 2025."
+    "text": "Awards\n\nLearning and Teaching award for innovation in assessment, 2022."
   },
   {
     "objectID": "blog.html",
     "href": "blog.html",
-    "title": "Name Surname",
+    "title": "Sean van der Merwe",
     "section": "",
-    "text": "My first blog post\n\n\n\n\n\n\nR\n\n\nPresentations in Quarto\n\n\n\n\n\n\n\n\n\n25 November 2025\n\n\nName Surname\n\n\n\n\n\n\nNo matching items"
+    "text": "Example blog post\n\n\n\nR\n\nPresentations in Quarto\n\n\n\n\n\n\n\n\n\n2025-11-25\n\n\nSean van der Merwe\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Initial Surname",
+    "title": "Sean van der Merwe",
     "section": "",
-    "text": "Initial Surname is from the well-known establishment of the University of Academia in the land of Statistics.\nInitial has served on various committees.\nInitial is an expert in websites in Quarto.\n \n  \n   \n  \n    \n     \n  \n  \n    \n     \n  \n  \n     scholar\n  \n  \n     orcid"
+    "text": "I am Dr Sean van der Merwe, Academic Department Head of the Department of Mathematical Statistics and Actuarial Science at the University of the Free State.\nI serve because I’m grateful. I’m grateful for the talents and opportunities given to me and wish to use them optimally, in the service of humanity. Primarily, I am grateful for the salvation granted me by Jesus Christ which fuels my spirit and drives me to give.\nI am the coordinator of the internal Statistical Consultation Unit of University of the Free State, South Africa. I also lecture Bayesian Statistics. Married to Catherine Sheares (now vdM). I used to play a lot of computer games and program for fun, now I only play a few games and only program for work (although my work is fun - what a blessing).\n \n  \n   \n  \n    \n     \n  \n  \n    \n     \n  \n  \n     scholar\n  \n  \n     orcid"
   },
   {
     "objectID": "publications.html",
     "href": "publications.html",
     "title": "Publications",
     "section": "",
-    "text": "title\nyear\njournal\n\n\n\n\nBiplot visualisations of the differences between multiple imputation techniques for simulated categorical data\n2025\nDiscover Data\n\n\nOn subset multiple correspondence analysis for incomplete multivariate categorical data\n2024\nCommunications in Statistics - Simulation and Computation\n\n\nGPAbin: unifying visualizations of multiple imputations for missing values\n2023\nCommunications in Statistics - Simulation and Computation\n\n\nComments: Development of an early career academic supervisor in Statistics - a discussion on a guiding rubric\n2022\nORION\n\n\nGPAbin: unifying visualizations of multiple imputations for missing values\n2021\nCommunications in Statistics - Simulation and Computation\n\n\nGPAbin: unifying visualizations of multiple imputations for missing values\n2021\nCommunications in Statistics: Simulation and Computation\n\n\nA Simulation Study for the Identification of Missing Data Mechanisms Using Visualisation\n2021\nData Analysis and Rationality in a Complex World. IFCS 2019. Studies in Classification, Data Analysis, and Knowledge Organization\n\n\nA Simulation Study for the Identification of Missing Data Mechanisms Using Visualisation\n2021\nStudies in Classification, Data Analysis, and Knowledge Organization\n\n\nVisualising Incomplete Data with Subset Multiple Correspondence Analysis\n2018\nArchives of Data Science, Series A (Online First)\n\n\nInvestigating the Performance of a Variation of Multiple Correspondence Analysis for Multiple Imputation in Categorical Data Sets\n2017\nJournal of Classification\n\n\nInvestigating the Performance of a Variation of Multiple Correspondence Analysis for Multiple Imputation in Categorical Data Sets\n2017\nJournal of Classification\n\n\n\n\n\n\n\n\nThis list is automatically populated from orcid.org"
+    "text": "title\nyear\njournal\n\n\n\n\nAddressing outliers in mixed-effects logistic regression: a more robust modeling approach\n2025\nJournal of Applied Statistics\n\n\nJoint quantile regression of longitudinal continuous proportions and time-to-event data: Application in medication adherence and persistence\n2025\nStatistical Methods in Medical Research\n\n\nAssessing the effectiveness of traditional wool scouring for small-scale farmers in South Africa: a study on detergents and scouring time\n2023\nResearch Journal of Textile and Apparel\n\n\nThe Rostral Epidural Rete Mirabile: Functional Significance in Blood Flow Regulatory Mechanisms in Giraffe (Giraffa camelopardalis)\n2023\nAnatomia\n\n\nA robust mixed‐effects parametric quantile regression model for continuous proportions: Quantifying the constraints to vitality in cushion plants\n2023\nStatistica Neerlandica\n\n\nLong-term study of the drought impact on the phytoplankton concentration and assemblages in two water supply reservoirs in Namibia\n2023\nAfrican Journal of Aquatic Science\n\n\nA Preliminary Study on the Siphon Mechanism in Giraffe (Giraffa camelopardalis)\n2022\nAnimals\n\n\nEvaluating the neutrophil-to-lymphocyte ratio as an indicator for early referral of patients with COVID-19 pneumonia to a high-care facility\n2022\nSouth African Medical Journal\n\n\nA robust method for the assessment of average bioequivalence in the presence of outliers and skewness\n2021\nPharmaceutical Research\n\n\nAnthropogenic Influences on Distance Traveled and Vigilance Behavior and Stress-Related Endocrine Correlates in Free-Roaming Giraffes\n2021\nAnimals\n\n\nSoil fertilization synergistically enhances the impact of pollination services in increasing seed yield of sunflower under dryland conditions\n2021\nJournal of Agricultural Science\n\n\nOn determining the distribution of a goodness-of-fit test statistic\n2021\narXiv\n\n\nAn empirical study of the behaviour of the sample kurtosis in samples from symmetric stable distributions\n2020\nSouth African Statistical Journal\n\n\nA method for Bayesian regression modelling of composition data\n2019\nSouth African Statistical Journal\n\n\nA method for Bayesian regression modelling of composition data\n2018\narXiv\n\n\nBayesian extreme value analysis of stock exchange data\n2018\narXiv\n\n\nBayesian fitting of dirichlet type i and II distributions\n2018\narXiv\n\n\nTime Series Analysis of the Southern Oscillation Index using Bayesian Additive Regression Trees\n2018\narXiv\n\n\nA multivariate gamma distribution applied to compositional data analysis\n2016\nSouth African Statistical Journal\n\n\nClassification of multiple Dirichlet observations under a Multinomial Model\n2016\nChemometrics and Intelligent Laboratory Systems\n\n\nMultiple discrimination between Dirichlet populations\n2014\nSouth African Statistical Journal\n\n\nAn Empirical Study to Find an Approximate Ranking of Citation Statistics Over Subject Fields\n2013\nGSTF Journal of Mathematics, Statistics and Operations Research\n\n\nStudent success : data mining measures what matters\n2009\nJournal for New Generation Sciences\n\n\n\n\n\n\n\n\nThis list is automatically populated from orcid.org"
   },
   {
     "objectID": "publications.html#journal-articles",
     "href": "publications.html#journal-articles",
     "title": "Publications",
     "section": "",
-    "text": "title\nyear\njournal\n\n\n\n\nBiplot visualisations of the differences between multiple imputation techniques for simulated categorical data\n2025\nDiscover Data\n\n\nOn subset multiple correspondence analysis for incomplete multivariate categorical data\n2024\nCommunications in Statistics - Simulation and Computation\n\n\nGPAbin: unifying visualizations of multiple imputations for missing values\n2023\nCommunications in Statistics - Simulation and Computation\n\n\nComments: Development of an early career academic supervisor in Statistics - a discussion on a guiding rubric\n2022\nORION\n\n\nGPAbin: unifying visualizations of multiple imputations for missing values\n2021\nCommunications in Statistics - Simulation and Computation\n\n\nGPAbin: unifying visualizations of multiple imputations for missing values\n2021\nCommunications in Statistics: Simulation and Computation\n\n\nA Simulation Study for the Identification of Missing Data Mechanisms Using Visualisation\n2021\nData Analysis and Rationality in a Complex World. IFCS 2019. Studies in Classification, Data Analysis, and Knowledge Organization\n\n\nA Simulation Study for the Identification of Missing Data Mechanisms Using Visualisation\n2021\nStudies in Classification, Data Analysis, and Knowledge Organization\n\n\nVisualising Incomplete Data with Subset Multiple Correspondence Analysis\n2018\nArchives of Data Science, Series A (Online First)\n\n\nInvestigating the Performance of a Variation of Multiple Correspondence Analysis for Multiple Imputation in Categorical Data Sets\n2017\nJournal of Classification\n\n\nInvestigating the Performance of a Variation of Multiple Correspondence Analysis for Multiple Imputation in Categorical Data Sets\n2017\nJournal of Classification\n\n\n\n\n\n\n\n\nThis list is automatically populated from orcid.org"
+    "text": "title\nyear\njournal\n\n\n\n\nAddressing outliers in mixed-effects logistic regression: a more robust modeling approach\n2025\nJournal of Applied Statistics\n\n\nJoint quantile regression of longitudinal continuous proportions and time-to-event data: Application in medication adherence and persistence\n2025\nStatistical Methods in Medical Research\n\n\nAssessing the effectiveness of traditional wool scouring for small-scale farmers in South Africa: a study on detergents and scouring time\n2023\nResearch Journal of Textile and Apparel\n\n\nThe Rostral Epidural Rete Mirabile: Functional Significance in Blood Flow Regulatory Mechanisms in Giraffe (Giraffa camelopardalis)\n2023\nAnatomia\n\n\nA robust mixed‐effects parametric quantile regression model for continuous proportions: Quantifying the constraints to vitality in cushion plants\n2023\nStatistica Neerlandica\n\n\nLong-term study of the drought impact on the phytoplankton concentration and assemblages in two water supply reservoirs in Namibia\n2023\nAfrican Journal of Aquatic Science\n\n\nA Preliminary Study on the Siphon Mechanism in Giraffe (Giraffa camelopardalis)\n2022\nAnimals\n\n\nEvaluating the neutrophil-to-lymphocyte ratio as an indicator for early referral of patients with COVID-19 pneumonia to a high-care facility\n2022\nSouth African Medical Journal\n\n\nA robust method for the assessment of average bioequivalence in the presence of outliers and skewness\n2021\nPharmaceutical Research\n\n\nAnthropogenic Influences on Distance Traveled and Vigilance Behavior and Stress-Related Endocrine Correlates in Free-Roaming Giraffes\n2021\nAnimals\n\n\nSoil fertilization synergistically enhances the impact of pollination services in increasing seed yield of sunflower under dryland conditions\n2021\nJournal of Agricultural Science\n\n\nOn determining the distribution of a goodness-of-fit test statistic\n2021\narXiv\n\n\nAn empirical study of the behaviour of the sample kurtosis in samples from symmetric stable distributions\n2020\nSouth African Statistical Journal\n\n\nA method for Bayesian regression modelling of composition data\n2019\nSouth African Statistical Journal\n\n\nA method for Bayesian regression modelling of composition data\n2018\narXiv\n\n\nBayesian extreme value analysis of stock exchange data\n2018\narXiv\n\n\nBayesian fitting of dirichlet type i and II distributions\n2018\narXiv\n\n\nTime Series Analysis of the Southern Oscillation Index using Bayesian Additive Regression Trees\n2018\narXiv\n\n\nA multivariate gamma distribution applied to compositional data analysis\n2016\nSouth African Statistical Journal\n\n\nClassification of multiple Dirichlet observations under a Multinomial Model\n2016\nChemometrics and Intelligent Laboratory Systems\n\n\nMultiple discrimination between Dirichlet populations\n2014\nSouth African Statistical Journal\n\n\nAn Empirical Study to Find an Approximate Ranking of Citation Statistics Over Subject Fields\n2013\nGSTF Journal of Mathematics, Statistics and Operations Research\n\n\nStudent success : data mining measures what matters\n2009\nJournal for New Generation Sciences\n\n\n\n\n\n\n\n\nThis list is automatically populated from orcid.org"
   }
 ]

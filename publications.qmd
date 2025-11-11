@@ -13,25 +13,31 @@ title: "Publications"
 library(rorcid)
 library(dplyr)
 #add your ORCID ID here
-b <- works("####-####-####-####")
-pubs <- tibble(title = b$title.title.value, 
+b <- works("0000-0002-8623-8639")
+pubs <- data.frame(title = b$title.title.value, 
                year = b$`publication-date.year.value`,
                journal = b$`journal-title.value`,
                doi = b$url.value) |>
-  arrange(desc(year))
-save(pubs, file="pubs.rda")
+  arrange(desc(year)) |>
+  mutate(
+    titlelink = glue::glue("[{title}]({doi})"),
+    title_for_matching = tolower(title) |> stringr::str_remove_all(fixed("<i>")) |> 
+      stringr::str_remove_all(fixed("</i>")) |> stringr::str_replace_all("‐", "-"),
+    journal = journal |> str_remove("^The ")
+    ) |>
+  distinct(title_for_matching, year, journal, .keep_all = TRUE) |> 
+  filter(!is.na(journal))
+pubs |> saveRDS("pubs.rds")
 ```
 
 ```{r}
 #| echo: false
 #| message: false
+#| warning: false
 library(dplyr)
-library(glue)
 library(gt)
 library(stringr)
-load("pubs.rda")
-pubs <- pubs |>
-  mutate(titlelink = glue("[{title}]({doi})"))
+pubs <- readRDS("pubs.rds")
 pubs |> 
   select(titlelink, year, journal) |>
   gt() |>
@@ -41,8 +47,7 @@ pubs |>
                  year ~ px(50),
                  journal ~ px(200)) |>
   cols_align("left")
-  
-#NOTE: Add arxiv profile [arxiv](https://arxiv.org/).
+
 ```
 
 ::: {style="font-size: 60%"}
