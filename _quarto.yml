@@ -6,7 +6,7 @@ project:
 website:
   title: "Sean van der Merwe"
   favicon: icon.png
-  site-url: https://acadseanvdm.github.io/MDAG_example/
+  site-url: https://acadseanvdm.github.io/site/
   navbar:
     background: primary
     search: true

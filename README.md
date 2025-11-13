@@ -1,3 +1,3 @@
-# createQuarto_website
+# Repository of Sean's Academic GitHub Pages Website
 
-This is a test change.
+This was created using Quarto website creation, using RStudio.
