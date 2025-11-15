@@ -2,31 +2,71 @@
 title: "Presentations"
 ---
 
-## Conferences
-
 ```{r}
-#| echo: false
-#| message: false
-library(readr)
-library(dplyr)
-library(gt)
-library(glue)
-library(lubridate)
-talks <- read_csv("talks.csv")
-talks <- talks |>
-  mutate(Date = dmy(Date)) |>
-  mutate(titlelink = ifelse(is.na(Link), Title, glue("[{Title}]({Link})"))) 
-talks |>
-  arrange(desc(Date)) |>
-  select(Date, titlelink, Event, Location, Details, Author) |>
-  gt() |>
-    gt::fmt_markdown(columns = titlelink) |>
-    cols_label(titlelink = "Title") |> 
-    gt::cols_width(
-      Date ~ px(100),
-      titlelink ~ px(400),
-      Location ~ px(250),
-      Details ~ px(100),
-      Author ~ px(100)) |>
-  cols_align("left")
+
 ```
+
+# Some of my recent talks
+
+Follow the links below to view the slides. If no authors are listed then assume sole author.
+
+## 2025
+
+[SASA 2025: A flexible mixed-effects quantile regression model for censored data](https://seanvdm.co.za/files/presentations/2025/SEP/sep_sasa.html#/title-slide) and [the longer version as presented to my department in 2025](https://seanvdm.co.za/files/presentations/2025/SEP/sep_department.html#/title-slide).
+
+[MDAG Workshop 2025: Beyond multivariate applications: Quarto for reproducible interactive documents - Sean van der Merwe, Johané Nienkemper-Swanepoel, Raeesa Ganey](https://muvisu.github.io/SASA2025_MDAG/) - with my contribution being the [Part 1 Slides](https://seanvdm.co.za/files/presentations/2025/MDAG/mdag2025p1.html#/title-slide), [Part 2 Slides](https://seanvdm.co.za/files/presentations/2025/MDAG/mdag2025p2.html#/title-slide) and a few other elements. See [the workshop website](https://muvisu.github.io/SASA2025_MDAG/) for more information. This work was also presented to my department in [this form](https://seanvdm.co.za/files/presentations/2025/PresPres/presentations_presentation.html#/title-slide).
+
+A 3rd research talk I did for my department in 2025 was titled [A selection of consultation projects I’ve worked on recently](https://seanvdm.co.za/files/presentations/2025/ConsProj/cons_department_2025.html#/title-slide).
+
+I do [a crash course on ethics for the actuarial science first years at UFS](https://seanvdm.co.za/files/presentations/Ethics/ActSciEthics.html#/title-slide), and I speak at some [UFS Open Days](https://seanvdm.co.za/files/presentations/UFS_Open_Day/UFS_Open_Day.html).
+
+You can download [my Bayes Course Slides and materials here](https://seanvdm.co.za/files/teaching/BayesCourseExample/Slides/) if you are interested in that.
+
+## 2024
+
+At SASA 2024 I presented [A quantile regression model for bounded longitudinal data and survival data - Divan A. Burger, Sean van der Merwe, Janet van Niekerk, Emmanuel Lesaffre, Antoine Pironet](https://seanvdm.co.za/files/presentations/SASA2024SvdM/longitudinal_survival.html#/title-slide), again adapted from [the longer version presented to my department](https://seanvdm.co.za/files/presentations/longitudinal_survival/longitudinal_survival.html#/title-slide).
+
+At around the same time I presented [my vision for my department in my bid for the position of academic department head](https://seanvdm.co.za/files/presentations/HoD/adh2024proposal.html) to which I was appointed from 1 January 2025.
+
+Before that I presented on [binomial regression, or more explicitly: Flexible regression of bounded count data - Divan A. Burger, Sean van der Merwe, Emmanuel Lesaffre](https://seanvdm.co.za/files/presentations/Binomial%20regression/binomial_regression.html#/title-slide).
+
+I gave a detailed practical presentation on [Generating data for assignments using R](https://seanvdm.co.za/files/presentations/Generating_data.html#/title-slide), and [a light-hearted discussion of myself and my journey, called Simulation is fun, for StatSNetSA](https://seanvdm.co.za/files/presentations/statsnetsa_svdm.html#/title-slide) that touched on similar areas.
+
+Another interesting presentation is on [Visualising densities in R](https://seanvdm.co.za/files/presentations/Visualising%20densities/Visualising_densities.html#/title-slide) which includes an integration of WebR for direct computation in the browser.
+
+Lastly, a talk on [Use of AI tools in Academics](https://seanvdm.co.za/files/work/AI/AI_at_the_UFS.html#/title-slide) that might still be slightly relevant. **I gave two similar talks in 2023.**
+
+## 2023 and 2022
+
+Other 2023 talks include [Prior selection for estimating the number of missing extreme values - Sean van der Merwe, Jan Beirlant, Andréhette Verster](https://seanvdm.co.za/files/work/evt/missing_extremes_priors.html#/title-slide), both in the department and at SASA,
+
+and [Exotic statistical modelling for real data: boerewors, river cleanup, etc.](https://seanvdm.co.za/files/work/consultation/SvdM_Fun_Projects_2023.html#/title-slide).
+
+## 2022
+
+Here the focus in [my SASA 2022 talk: Robust inference in the presence of censoring, skewness, and extreme values](https://seanvdm.co.za/files/work/skewt/SvdM_SASA2022.html#/title-slide), was on a Skew-Student distribution.
+
+I also addressed the MBA students with an [Introduction to Quantitative Research for Business Students](https://seanvdm.co.za/files/workshops/mba2022/SvdM_Quantitative_Research_2022.html#/title-slide).
+
+# Older stuff
+
+[The Power of R Markdown for Assessment and Teaching](https://seanvdm.co.za/post/assessment/SvdM_Learning_and_Teaching_2022.html#/title-slide) which discusses my extensive use of **randomised assessment** in my teaching - won 2nd place in the 2022 UFS Learning and Teaching Awards in the category of *Innovating my curriculum through the use of technology and/or online tools*.
+
+I have built a new module evaluation system for my faculty and [presented a workshop discussing the system and the tools used to build it](https://seanvdm.co.za/post/moduleevaluation/ModuleEvaluationsEtc.html#/title-slide).
+
+[Priors for t and skew-t models](https://seanvdm.co.za/files/workshops/skewt2021/SvdMSkewt2021.html#1), with a focus on flexible latent variable models. [The source code](https://seanvdm.co.za/files/workshops/skewt2021) is also available.
+
+[Multivariate Data Analysis via Stan Modelling Software](https://seanvdm.co.za/files/workshops/mdag2021/MDAGstan2021.html#1), with a focus on flexible latent variable models. [The source code](https://seanvdm.co.za/files/workshops/mdag2021/) is also available.
+
+Presentation for StatCon2020: [Stan as an all-purpose modelling solution](https://seanvdm.co.za/files/video/SvdMStanForStatcon2020.mp4) (video version with my voice). Also available is [the slides and source code zipped up](https://seanvdm.co.za/files/SvdMStanForStatcon2020.zip).
+
+[Department presentation on statistical modelling with Stan](https://seanvdm.co.za/files/STANPres2019SvdM.pdf)
+
+[Flash facts presentation for UFS discussion](https://seanvdm.co.za/files/SvdMFlashFacts20190605.pdf)
+
+[Department presentation on Adventures in Statistical Consulation](https://seanvdm.co.za/files/DepPres2019SvdM.pdf)
+
+## Random topics
+
+[My EXCEL addin](https://seanvdm.co.za/files/statsaddin.xlam) with tons of useful functions like copying tables in R or LateX format, simulating many distributions, logit transforms, deleting alternating columns, *etc.* Must be manually placed in C:\\Users\\You\\AppData\\Roaming\\Microsoft\\Addins and then activated in EXCEL via File->Options->Addins->Go.
+

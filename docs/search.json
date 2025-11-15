@@ -4,42 +4,77 @@
     "href": "talks.html",
     "title": "Presentations",
     "section": "",
-    "text": "Warning: package 'gt' was built under R version 4.5.2\n\n\n\n\n\n\n\n\nDate\nTitle\nEvent\nLocation\nDetails\nAuthor\n\n\n\n\n2025-11-25\nBest websites in Quarto\nSASA2025\nVanderbijlpark at the Riverside Sun Hotel\nContributed talk\nPresenting author"
+    "text": "Follow the links below to view the slides. If no authors are listed then assume sole author.\n\n\nSASA 2025: A flexible mixed-effects quantile regression model for censored data and the longer version as presented to my department in 2025.\nMDAG Workshop 2025: Beyond multivariate applications: Quarto for reproducible interactive documents - Sean van der Merwe, Johané Nienkemper-Swanepoel, Raeesa Ganey - with my contribution being the Part 1 Slides, Part 2 Slides and a few other elements. See the workshop website for more information. This work was also presented to my department in this form.\nA 3rd research talk I did for my department in 2025 was titled A selection of consultation projects I’ve worked on recently.\nI do a crash course on ethics for the actuarial science first years at UFS, and I speak at some UFS Open Days.\nYou can download my Bayes Course Slides and materials here if you are interested in that.\n\n\n\nAt SASA 2024 I presented A quantile regression model for bounded longitudinal data and survival data - Divan A. Burger, Sean van der Merwe, Janet van Niekerk, Emmanuel Lesaffre, Antoine Pironet, again adapted from the longer version presented to my department.\nAt around the same time I presented my vision for my department in my bid for the position of academic department head to which I was appointed from 1 January 2025.\nBefore that I presented on binomial regression, or more explicitly: Flexible regression of bounded count data - Divan A. Burger, Sean van der Merwe, Emmanuel Lesaffre.\nI gave a detailed practical presentation on Generating data for assignments using R, and a light-hearted discussion of myself and my journey, called Simulation is fun, for StatSNetSA that touched on similar areas.\nAnother interesting presentation is on Visualising densities in R which includes an integration of WebR for direct computation in the browser.\nLastly, a talk on Use of AI tools in Academics that might still be slightly relevant. I gave two similar talks in 2023.\n\n\n\nOther 2023 talks include Prior selection for estimating the number of missing extreme values - Sean van der Merwe, Jan Beirlant, Andréhette Verster, both in the department and at SASA,\nand Exotic statistical modelling for real data: boerewors, river cleanup, etc..\n\n\n\nHere the focus in my SASA 2022 talk: Robust inference in the presence of censoring, skewness, and extreme values, was on a Skew-Student distribution.\nI also addressed the MBA students with an Introduction to Quantitative Research for Business Students."
   },
   {
-    "objectID": "talks.html#conferences",
-    "href": "talks.html#conferences",
+    "objectID": "talks.html#section",
+    "href": "talks.html#section",
     "title": "Presentations",
     "section": "",
-    "text": "Warning: package 'gt' was built under R version 4.5.2\n\n\n\n\n\n\n\n\nDate\nTitle\nEvent\nLocation\nDetails\nAuthor\n\n\n\n\n2025-11-25\nBest websites in Quarto\nSASA2025\nVanderbijlpark at the Riverside Sun Hotel\nContributed talk\nPresenting author"
+    "text": "SASA 2025: A flexible mixed-effects quantile regression model for censored data and the longer version as presented to my department in 2025.\nMDAG Workshop 2025: Beyond multivariate applications: Quarto for reproducible interactive documents - Sean van der Merwe, Johané Nienkemper-Swanepoel, Raeesa Ganey - with my contribution being the Part 1 Slides, Part 2 Slides and a few other elements. See the workshop website for more information. This work was also presented to my department in this form.\nA 3rd research talk I did for my department in 2025 was titled A selection of consultation projects I’ve worked on recently.\nI do a crash course on ethics for the actuarial science first years at UFS, and I speak at some UFS Open Days.\nYou can download my Bayes Course Slides and materials here if you are interested in that."
   },
   {
-    "objectID": "posts/2025-11-25-my-first-blog-post/index.html",
-    "href": "posts/2025-11-25-my-first-blog-post/index.html",
-    "title": "Example blog post",
+    "objectID": "talks.html#section-1",
+    "href": "talks.html#section-1",
+    "title": "Presentations",
     "section": "",
-    "text": "Look at all the impressive skills I have acquired in the MDAG 2025 workshop."
+    "text": "At SASA 2024 I presented A quantile regression model for bounded longitudinal data and survival data - Divan A. Burger, Sean van der Merwe, Janet van Niekerk, Emmanuel Lesaffre, Antoine Pironet, again adapted from the longer version presented to my department.\nAt around the same time I presented my vision for my department in my bid for the position of academic department head to which I was appointed from 1 January 2025.\nBefore that I presented on binomial regression, or more explicitly: Flexible regression of bounded count data - Divan A. Burger, Sean van der Merwe, Emmanuel Lesaffre.\nI gave a detailed practical presentation on Generating data for assignments using R, and a light-hearted discussion of myself and my journey, called Simulation is fun, for StatSNetSA that touched on similar areas.\nAnother interesting presentation is on Visualising densities in R which includes an integration of WebR for direct computation in the browser.\nLastly, a talk on Use of AI tools in Academics that might still be slightly relevant. I gave two similar talks in 2023."
   },
   {
-    "objectID": "posts/2025-11-25-my-first-blog-post/index.html#motivation",
-    "href": "posts/2025-11-25-my-first-blog-post/index.html#motivation",
-    "title": "Example blog post",
+    "objectID": "talks.html#and-2022",
+    "href": "talks.html#and-2022",
+    "title": "Presentations",
     "section": "",
-    "text": "Look at all the impressive skills I have acquired in the MDAG 2025 workshop."
+    "text": "Other 2023 talks include Prior selection for estimating the number of missing extreme values - Sean van der Merwe, Jan Beirlant, Andréhette Verster, both in the department and at SASA,\nand Exotic statistical modelling for real data: boerewors, river cleanup, etc.."
   },
   {
-    "objectID": "posts/2025-11-25-my-first-blog-post/index.html#about-the-example-illustrating-the-classic-iris-data-set-with-biplotez",
-    "href": "posts/2025-11-25-my-first-blog-post/index.html#about-the-example-illustrating-the-classic-iris-data-set-with-biplotez",
-    "title": "Example blog post",
-    "section": "About the example: Illustrating the classic iris data set with biplotEZ",
-    "text": "About the example: Illustrating the classic iris data set with biplotEZ\n\nlibrary(biplotEZ)\n\nWelcome to biplotEZ! \nThis package is used to construct biplots \nRun ?biplot or vignette() for more information\n\n\n\nAttaching package: 'biplotEZ'\n\n\nThe following object is masked from 'package:stats':\n\n    biplot\n\nbp &lt;- biplot(iris,scale=TRUE) |&gt; \n  PCA(group.aes=iris$Species) |&gt; \n  axes(col=\"black\") |&gt; \n  samples(col=c(\"pink\",\"orange\",\"firebrick3\"),opacity = 0.7) |&gt;\n  plot()"
+    "objectID": "talks.html#section-2",
+    "href": "talks.html#section-2",
+    "title": "Presentations",
+    "section": "",
+    "text": "Here the focus in my SASA 2022 talk: Robust inference in the presence of censoring, skewness, and extreme values, was on a Skew-Student distribution.\nI also addressed the MBA students with an Introduction to Quantitative Research for Business Students."
   },
   {
-    "objectID": "posts/2025-11-25-my-first-blog-post/index.html#next",
-    "href": "posts/2025-11-25-my-first-blog-post/index.html#next",
-    "title": "Example blog post",
-    "section": "Next",
-    "text": "Next\nStay tuned for some new blog posts."
+    "objectID": "talks.html#random-topics",
+    "href": "talks.html#random-topics",
+    "title": "Presentations",
+    "section": "Random topics",
+    "text": "Random topics\nMy EXCEL addin with tons of useful functions like copying tables in R or LateX format, simulating many distributions, logit transforms, deleting alternating columns, etc. Must be manually placed in C:\\Users\\You\\AppData\\Roaming\\Microsoft\\Addins and then activated in EXCEL via File-&gt;Options-&gt;Addins-&gt;Go."
+  },
+  {
+    "objectID": "posts/2025-11-15-biplot-echart/index.html",
+    "href": "posts/2025-11-15-biplot-echart/index.html",
+    "title": "Drawing an interactive biplot with echarts4r",
+    "section": "",
+    "text": "Biplots can contain a lot of information. To dig into that information it would help if one could interact with the plot. Thus, we want to plot the information in a modern Javascript plotting standard."
+  },
+  {
+    "objectID": "posts/2025-11-15-biplot-echart/index.html#points",
+    "href": "posts/2025-11-15-biplot-echart/index.html#points",
+    "title": "Drawing an interactive biplot with echarts4r",
+    "section": "Points",
+    "text": "Points\n\n\nCode\n# Creating the point data frame is easy:\nd &lt;- data.frame(x = bp$Z[,1], y = bp$Z[,2], Species = iris$Species)\n# As is plotting it:\nd |&gt; group_by(Species) |&gt; \n  e_charts(x = x, width = fig_size, height = fig_size) |&gt;\n  e_scatter(serie = y, symbol_size = 5) |&gt; \n  e_toolbox_feature(\"dataZoom\") |&gt; \n  e_tooltip(axisPointer = list(\n      type = \"cross\"\n    ))\n\n\n\n\n\n\nTry using the zoom tool to zoom in."
+  },
+  {
+    "objectID": "posts/2025-11-15-biplot-echart/index.html#axes",
+    "href": "posts/2025-11-15-biplot-echart/index.html#axes",
+    "title": "Drawing an interactive biplot with echarts4r",
+    "section": "Axes",
+    "text": "Axes\nThose fancy axes are not so easy. Let’s reconstruct them in a new way:\n\n\nCode\ncreate_ax_df &lt;- function(bp) {\n  xu &lt;- bp$ax.one.unit[,1]\n  yu &lt;- bp$ax.one.unit[,2]\n  tkz &lt;- ceiling(bp$axes$ticks/2)\n  ax_df &lt;- data.frame(\n    X = seq_along(xu) |&gt; sapply(\\(i) {\n      seq(-tkz[i]*abs(xu[i]), tkz[i]*abs(xu[i]), abs(xu[i]))*sign(xu[i])\n    }) |&gt; c(),\n    Y = seq_along(yu) |&gt; sapply(\\(i) {\n      seq(-tkz[i]*abs(yu[i]), tkz[i]*abs(yu[i]), abs(yu[i]))*sign(yu[i])\n    }) |&gt; c(),\n    Variable = rep(bp$axes$names, tkz*2+1),\n    VarNum = rep(seq_along(bp$axes$names), tkz*2+1)\n  )\n  ProjMat &lt;- as.matrix(ax_df[, 1:2]) %*% t(bp$Lmat[, 1:2])\n  ax_df$Projection &lt;- seq_len(nrow(ax_df)) |&gt; sapply(\\(i) {\n      ProjMat[i, ax_df$VarNum[i]] * bp$sd[ax_df$VarNum[i]] + bp$means[ax_df$VarNum[i]]\n    }) |&gt; round(1)\n  ax_df\n}\nv &lt;- bp |&gt; create_ax_df() |&gt; group_by(Variable)\n\n\nThen we draw a plot of the axes:\n\n\nCode\nv |&gt;\n  e_charts(x = X, width = fig_size, height = fig_size) |&gt;\n  e_line(serie = Y) |&gt; \n  e_scatter(serie = Y)"
+  },
+  {
+    "objectID": "posts/2025-11-15-biplot-echart/index.html#combined",
+    "href": "posts/2025-11-15-biplot-echart/index.html#combined",
+    "title": "Drawing an interactive biplot with echarts4r",
+    "section": "Combined",
+    "text": "Combined\nWe can combine it with the scatter plot:\n\n\nCode\nd |&gt; group_by(Species) |&gt; \n  e_charts(x = x, width = fig_size, height = fig_size) |&gt;\n  e_scatter(serie = y, symbol_size = 5) |&gt; \n  e_data(v, x = X) |&gt;\n  e_line(serie = Y) |&gt; \n  e_scatter(serie = Y) |&gt; \n  e_toolbox_feature(\"dataZoom\") |&gt; \n  e_tooltip(axisPointer = list(\n      type = \"cross\"\n    ))\n\n\n\n\n\n\nThe only problem is that our tooltips don’t convey any useful information 😢."
+  },
+  {
+    "objectID": "posts/2025-11-15-biplot-echart/index.html#tooltips",
+    "href": "posts/2025-11-15-biplot-echart/index.html#tooltips",
+    "title": "Drawing an interactive biplot with echarts4r",
+    "section": "Tooltips",
+    "text": "Tooltips\nTo have nice tooltips we first create them as another dataset variable in advance, then bind them to the observations as follows:\n\n\nCode\ncreate_tooltip &lt;- function(df, digits = 3) {\n  nms &lt;- names(df)\n  d &lt;- seq_len(ncol(df)) |&gt; lapply(\\(j) {\n    if (is.numeric(df[[j]])) {x &lt;- df[[j]] |&gt; round(digits = digits)} else {x &lt;- df[[j]]}\n    paste0(nms[j], \": \", x)\n  }) |&gt; list2DF()\n  seq_len(nrow(d)) |&gt; sapply(\\(i) {\n    paste0(d[i,] |&gt; unlist(), collapse = \"&lt;br&gt;\")\n  })\n}\nd$tooltip &lt;- iris |&gt; create_tooltip()\n\n\n\n\nCode\nd |&gt; group_by(Species) |&gt; \n  e_charts(x = x, width = fig_size*1.25, height = fig_size) |&gt;\n  e_scatter(serie = y, bind = tooltip, symbol_size = 5) |&gt; \n  e_data(v, x = X) |&gt;\n  e_line(serie = Y) |&gt; \n  e_scatter(serie = Y, bind = Projection, \n            label = list(show = TRUE, formatter = \"{b}\", offset = c(10,10))) |&gt; \n  e_toolbox_feature(\"dataZoom\") |&gt; \n  e_tooltip(\n    formatter = htmlwidgets::JS(\"\n        function(params) {\n          return params.name;\n        }\n      \")\n    ) |&gt;\n  e_grid(width = \"67%\", right = \"20%\") |&gt; \n  e_legend(\n    orient = \"vertical\",   # vertical layout\n    right = \"1%\",         # position from the right\n    top = \"middle\"         # vertically centered\n  )"
   },
   {
     "objectID": "education.html",
@@ -74,7 +109,7 @@
     "href": "blog.html",
     "title": "Sean van der Merwe",
     "section": "",
-    "text": "Example blog post\n\n\n\nR\n\nPresentations in Quarto\n\n\n\n\n\n\n\n\n\n2025-11-25\n\n\nSean van der Merwe\n\n\n\n\n\nNo matching items"
+    "text": "Drawing an interactive biplot with echarts4r\n\n\n\nR\n\nplot\n\n\n\n\n\n\n\n\n\n2025-11-15\n\n\nSean van der Merwe\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",

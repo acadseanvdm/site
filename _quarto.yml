@@ -13,14 +13,14 @@ website:
     left:
       - text: Home
         href: index.qmd
-      - text: Education
-        href: education.qmd
- #     - text: Talks
-#        href: talks.qmd  
+      - text: Talks
+        href: talks.qmd  
       - text: Blog posts
         href: blog.qmd
       - text: Publications
         href: publications.qmd  
+      - text: Education
+        href: education.qmd
     right:
       - icon: github
         href: https://github.com/acadseanvdm      
