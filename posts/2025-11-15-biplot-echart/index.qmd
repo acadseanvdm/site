@@ -199,7 +199,8 @@ e_biplotEZ <- function(bp, width = 600, height = 500) {
     )
     ProjMat <- as.matrix(ax_df[, 1:2]) %*% t(bp$Lmat[, 1:2])
     ax_df$Projection <- seq_len(nrow(ax_df)) |> sapply(\(i) {
-        ProjMat[i, ax_df$VarNum[i]] * bp$sd[ax_df$VarNum[i]] + bp$means[ax_df$VarNum[i]]
+        ProjMat[i, ax_df$VarNum[i]] * (bp$sd[ax_df$VarNum[i]]^bp$scaled) + 
+        (bp$means[ax_df$VarNum[i]]*bp$center)
       }) |> round(1)
     ax_df
   }
