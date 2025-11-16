@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sean van der Merwe">
+<meta name="dcterms.date" content="2023-02-19">
+
+<title>Simple Power Analysis – Sean van der Merwe</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../icon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-fb8f00b08e6877ddf12a0b337ae0133a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Sean van der Merwe</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks.html"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../education.html"> 
+<span class="menu-text">Education</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/acadseanvdm"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#scenario" id="toc-scenario" class="nav-link active" data-scroll-target="#scenario">Scenario</a></li>
+  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question">Question</a></li>
+  <li><a href="#framework" id="toc-framework" class="nav-link" data-scroll-target="#framework">Framework</a></li>
+  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power">Power</a></li>
+  <li><a href="#power-study-procedure" id="toc-power-study-procedure" class="nav-link" data-scroll-target="#power-study-procedure">Power study procedure</a></li>
+  <li><a href="#smoothed-version-of-our-example" id="toc-smoothed-version-of-our-example" class="nav-link" data-scroll-target="#smoothed-version-of-our-example">Smoothed version of our example</a>
+  <ul class="collapse">
+  <li><a href="#two-sample-versus-paired-sample" id="toc-two-sample-versus-paired-sample" class="nav-link" data-scroll-target="#two-sample-versus-paired-sample">Two sample versus Paired sample</a>
+  <ul class="collapse">
+  <li><a href="#unbalanced-samples" id="toc-unbalanced-samples" class="nav-link" data-scroll-target="#unbalanced-samples">Unbalanced samples</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#discrete-version-of-our-example" id="toc-discrete-version-of-our-example" class="nav-link" data-scroll-target="#discrete-version-of-our-example">Discrete version of our example</a>
+  <ul class="collapse">
+  <li><a href="#unbalanced-samples-1" id="toc-unbalanced-samples-1" class="nav-link" data-scroll-target="#unbalanced-samples-1">Unbalanced samples</a></li>
+  <li><a href="#u-test" id="toc-u-test" class="nav-link" data-scroll-target="#u-test">U test</a></li>
+  </ul></li>
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression">Regression</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Simple Power Analysis</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">hypothesis testing</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sean van der Merwe </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2023-02-19</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="scenario" class="level1">
+<h1>Scenario</h1>
+<p>Assume the following:</p>
+<p>I will be running a workshop called “Stats is fun” for a small number of participants. Before the workshop I will ask the participants “How enthusiastic are you about statistics?” and give them a scale from 1 to 5. Afterwards, I will ask the same people the same question and compare the responses.</p>
+</section>
+<section id="question" class="level1">
+<h1>Question</h1>
+<p>The primary research question is whether the workshop had an impact on the enthusiasm of the participants for statistics.</p>
+<p>Of course, as is, this question cannot be directly answered. We must clearly define ‘impact’ and how we hope to measure it.</p>
+</section>
+<section id="framework" class="level1">
+<h1>Framework</h1>
+<p>We also need to define the framework we will attempt to use to answer the question as there are several options.</p>
+<p>For this example we will stick to the <strong>classical (frequentist)</strong> hypothesis testing framework.</p>
+<p>This framework is characterised by the following key components:</p>
+<ol type="1">
+<li>Assume the world is boring. There is nothing changing and no differences of interest anywhere.</li>
+<li>Conduct an experiment and observe something.</li>
+<li>Calculate the probability of observing something at least as interesting as what was observed, under the assumption that everything is boring on the whole (in the bigger picture we call the population). We call this probability a <em>p-value</em>.</li>
+<li>If the p-value is large we continue to assume that everything is boring. We do not conclude that there is no difference, because that would be wrong, we are quite sure that the population difference is not actually zero. We simply continue to assume no difference as a substitute for the reality that we really can’t tell what the difference is from our experiment due to insufficient evidence either way.</li>
+<li>On the other hand, if the p-value is small, we conclude that there is evidence against the boring (null) hypothesis and thus that there is evidence of a difference or change from our experiment.</li>
+</ol>
+<p>This framework has many severe flaws, far too many to discuss here, and yet in well designed experiments it does what it is meant to do: <strong>help us to talk less nonsense</strong>!</p>
+<p>The real problem with it is how often it is misused and abused. All commonly used statistical hypothesis tests rely on at least two key assumptions:</p>
+<ol type="1">
+<li>That the sample taken is representative of the population being discussed.</li>
+<li>That the test being done is the only one of its kind being applied to the data set.</li>
+</ol>
+<p>These assumptions are violated far more often than they hold. Only the second one can be <em>partially</em> adjusted for.</p>
+</section>
+<section id="power" class="level1">
+<h1>Power</h1>
+<p>The framework as discussed so far is entirely focussed on the sample and the null hypothesis; yet it is the population and the alternative that are of real world interest in most cases.</p>
+<ol type="1">
+<li>Among otherwise similar tests, a test with more power is preferred, as more power means it is more likely to pick up the differences of interest.</li>
+<li>In order for failure to reject the null hypothesis to be interesting, we need a test with a lot of power as we need to argue that, ‘had there been a difference then we would have detected it.’ Failing to reject an underpowered test means nothing as it could easily be caused by not collecting a large enough sample.</li>
+</ol>
+<p>For a top journal to take your study seriously in many applied fields, you are required to do a power study in advance. Doing it retrospectively will bias the results.</p>
+<p>Yet, power studies are often skipped for various reasons, such as the massive effort involved sometimes, and other constraints overriding the desired power.</p>
+<p>Power studies are effort because they require you to describe the expected results of the study in extreme detail, and with uncertainty, prior to actually collecting any data.</p>
+<p>There is a shortcut a lot of people like to use though: they cite similar studies with similar or smaller sample sizes that achieved significant results. While this is a logical argument, it does not account for publication bias.</p>
+</section>
+<section id="power-study-procedure" class="level1">
+<h1>Power study procedure</h1>
+<ol type="1">
+<li>Specify the analysis procedure in full detail. 1. Describe how the data will be collected, cleaned, stored, and prepared for analysis. 1. Then describe the model that will be applied, in full mathematical detail, defining all parameters. 1. And lay out how the model fit will be interpreted and conclusions drawn, using definitive rules.</li>
+<li>Specify the expected values of <strong>all</strong> the model parameters, including those describing the uncertainty in your expectations. 1. This should be done twice or more: once under the null hypothesis and at least once under the alternative hypothesis.</li>
+<li>Using the model and the chosen parameter values, simulate a large number of fake data sets.</li>
+<li>Perform the analysis on each fake data set one at a time and note the conclusion drawn.</li>
+<li>Report the proportion of times you reached each possible conclusion for each scenario.</li>
+<li>Repeat the above 3 steps for each of a variety of sample sizes, and connect the dots to obtain power curves.</li>
+<li>If you do the above 4 steps under the null hypothesis you hope to see low rejection rates but under the alternative hypothesis you hope to see very high rejection rates.</li>
+</ol>
+</section>
+<section id="smoothed-version-of-our-example" class="level1">
+<h1>Smoothed version of our example</h1>
+<p>Suppose we define ‘impact’ as the average difference in scores, then an obvious model is the t-test setup.</p>
+<p><strong>However, we would normally be getting responses on a discrete scale, not accurate real numbers. We will use the real numbers first to show the principle.</strong></p>
+<p>So, under the alternative I define the model and expected parameters as follows:</p>
+<p><span class="math display">\[\begin{aligned}
+x_i &amp;= \text{ before score for person }i \\
+y_i &amp;= \text{ after score for person }i \\
+d_i &amp;= y_i - x_i,\ i = 1\dots n \\
+d_i &amp;\sim N(\mu_d, \sigma^2_d) \\
+\mu_d &amp;= 0.3 \\
+\sigma^2_d &amp;= 1
+\end{aligned}\]</span></p>
+<p>where the numbers are chosen based on a combination of personal expectation and results from previous studies of a similar kind.</p>
+<p>Our decision rule is that the p-value from a t-test comparing the average difference to zero <span class="math inline">\((H_0:\mu_d=0)\)</span> is less than <span class="math inline">\(\alpha=0.05\)</span>.</p>
+<p>The question to be answered first is, “What is the minimum sample size needed to obtain at least 80% power?”</p>
+<p>In this simple scenario the question can be quickly answered using one of several power calculation packages in R. We will do it from first principles instead, for illustration and because scenarios can quickly stop being simple.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n_datasets <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Sample_Size <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">150</span>, <span class="dv">10</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sim1 <span class="ot">&lt;-</span> \(n, <span class="at">mu_d =</span> <span class="fl">0.3</span>, <span class="at">sigma_d =</span> <span class="dv">1</span>) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(n, mu_d, sigma_d)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"power1.rds"</span>)) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  (Sample_Size <span class="sc">|&gt;</span> <span class="fu">sapply</span>(\(n) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    n_datasets <span class="sc">|&gt;</span> <span class="fu">replicate</span>({</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      (n <span class="sc">|&gt;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">sim1</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">t.test</span>())<span class="sc">$</span>p.value</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">|&gt;</span> <span class="fu">colMeans</span>() <span class="ot">-&gt;</span> Power</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  Power <span class="sc">|&gt;</span> <span class="fu">saveRDS</span>(<span class="st">"power1.rds"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  Power <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"power1.rds"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Sample_Size, Power, <span class="at">type =</span> <span class="st">'l'</span>, <span class="at">col =</span> <span class="st">'purple'</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grid</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>So the optimal sample size is 100.</p>
+<section id="two-sample-versus-paired-sample" class="level2">
+<h2 class="anchored" data-anchor-id="two-sample-versus-paired-sample">Two sample versus Paired sample</h2>
+<p>Let us compare the paired data example above with what happens when the data isn’t matched correctly.</p>
+<p>Suppose I forgot to ask each person for a unique identifier, so we still have the same sized samples but no longer paired. To make this a fair comparison, we keep the other factors the same.</p>
+<p>To be realistic we incorporate some correlation between the responses for the case where we are able to partially line up the responses.</p>
+<p><span class="math display">\[\begin{aligned}
+x_i &amp;= \text{ before score for person }i \\
+y_i &amp;= \text{ after score for person }i \\
+[x_i\ y_i] &amp;\sim N_2([3.7\ 4], [1\ \rho; \rho\ 1]) \\
+\end{aligned}\]</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n_datasets <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Sample_Size <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">50</span>, <span class="dv">250</span>, <span class="dv">20</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sim2 <span class="ot">&lt;-</span> \(n, <span class="at">rho =</span> <span class="fl">0.5</span>, <span class="at">mu =</span> <span class="fu">c</span>(<span class="fl">3.7</span>, <span class="dv">4</span>), <span class="at">sigma =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, rho, rho, <span class="dv">1</span>), <span class="dv">2</span>)) {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(n, mu, sigma)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>rho_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>,<span class="fl">0.9</span>,<span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"power2.rds"</span>)) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  rho_seq <span class="sc">|&gt;</span> <span class="fu">sapply</span>(\(rho) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  (Sample_Size <span class="sc">|&gt;</span> <span class="fu">sapply</span>(\(n) {</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    n_datasets <span class="sc">|&gt;</span> <span class="fu">replicate</span>({</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      n <span class="sc">|&gt;</span> <span class="fu">sim2</span>(rho) <span class="ot">-&gt;</span> d_mat</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">t.test</span>(d_mat[,<span class="dv">1</span>], d_mat[,<span class="dv">2</span>])<span class="sc">$</span>p.value</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">|&gt;</span> <span class="fu">colMeans</span>() }) <span class="ot">-&gt;</span> Power</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  Power <span class="sc">|&gt;</span> <span class="fu">saveRDS</span>(<span class="st">"power2.rds"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  Power <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"power2.rds"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">range</span>(Sample_Size), <span class="fu">range</span>(Power), <span class="at">type =</span> <span class="st">'n'</span>, <span class="at">xlab =</span> <span class="st">"Sample Size"</span>, <span class="at">ylab =</span> <span class="st">"Power"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grid</span>()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Power)) {</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(Sample_Size, Power[,i], <span class="at">col =</span> i, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'bottomright'</span>, <span class="at">legend =</span> rho_seq, <span class="at">title =</span> <span class="fu">expression</span>(rho), <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Power))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We note that only as the correlation approaches 1 (unrealistic) do we approach the same power we had as with the paired data. Paired data is more powerful.</p>
+<section id="unbalanced-samples" class="level3">
+<h3 class="anchored" data-anchor-id="unbalanced-samples">Unbalanced samples</h3>
+<p>Suppose now that instead of balanced samples with correlation, we had two independent samples of different sizes. This would occur any time we survey two different groups of people.</p>
+<p><span class="math display">\[\begin{aligned}
+x_i &amp;= \text{ before score for person }i,\ i=1:n_1 \\
+y_j &amp;= \text{ after score for person }j,\ j=1:n_2 \\
+x_i &amp;\sim N(3.7, 0.9) \\
+x_j &amp;\sim N(4, 1.1) \\
+\end{aligned}\]</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n_datasets <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Sample_Size <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">50</span>, <span class="dv">250</span>, <span class="dv">20</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>sim2sample <span class="ot">&lt;-</span> \(n1, n2) {</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="fu">rnorm</span>(n1, <span class="fl">3.7</span>, <span class="fl">0.9</span>), <span class="fu">rnorm</span>(n2, <span class="dv">4</span>, <span class="fl">1.1</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"power3.rds"</span>)) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  Sample_Size <span class="sc">|&gt;</span> <span class="fu">sapply</span>(\(n1) {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  (Sample_Size <span class="sc">|&gt;</span> <span class="fu">sapply</span>(\(n2) {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    n_datasets <span class="sc">|&gt;</span> <span class="fu">replicate</span>({</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sim2sample</span>(n1, n2) <span class="ot">-&gt;</span> d_list</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">t.test</span>(d_list[[<span class="dv">1</span>]], d_list[[<span class="dv">2</span>]])<span class="sc">$</span>p.value</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">|&gt;</span> <span class="fu">colMeans</span>() }) <span class="ot">-&gt;</span> Power</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  Power <span class="sc">|&gt;</span> <span class="fu">saveRDS</span>(<span class="st">"power3.rds"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  Power <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"power3.rds"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">range</span>(Sample_Size), <span class="fu">range</span>(Power), <span class="at">type =</span> <span class="st">'n'</span>, <span class="at">xlab =</span> <span class="fu">expression</span>(n[<span class="dv">2</span>]), <span class="at">ylab =</span> <span class="st">"Power"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grid</span>()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Power)) {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(Sample_Size, Power[,i], <span class="at">col =</span> i, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'bottomright'</span>, <span class="at">legend =</span> Sample_Size, <span class="at">title =</span> <span class="fu">expression</span>(n[<span class="dv">1</span>]), <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Power))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We now see that we need the smaller sample size to be larger than the combined sample size in the paired case to get close to the same power.</p>
+</section>
+</section>
+</section>
+<section id="discrete-version-of-our-example" class="level1">
+<h1>Discrete version of our example</h1>
+<p><strong>We would normally be getting responses on a discrete scale, not accurate real numbers. We will now use discrete numbers are compare to see the impact on power.</strong></p>
+<p>So, under the alternative I define the model and expected parameters as follows:</p>
+<p><span class="math display">\[\begin{aligned}
+x_i &amp;= \text{ before score for person }i \\
+y_i &amp;= \text{ after score for person }i \\
+d_i &amp;= y_i - x_i,\ i = 1\dots n \\
+d_i &amp;\sim roundedN(\mu_d, \sigma^2_d) \\
+\mu_d &amp;= 0.3 \\
+\sigma^2_d &amp;= 1
+\end{aligned}\]</span></p>
+<p>where the numbers are chosen based on a combination of personal expectation and results from previous studies of a similar kind.</p>
+<p>Our decision rule is that the p-value from a t-test comparing the average difference to zero <span class="math inline">\((H_0:\mu_d=0)\)</span> is less than <span class="math inline">\(\alpha=0.05\)</span>.</p>
+<p>The question to be answered first is, “What is the minimum sample size needed to obtain at least 80% power?”</p>
+<p>In this simple scenario the question can be quickly answered using one of several power calculation packages in R. We will do it from first principles instead, for illustration and because scenarios can quickly stop being simple.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n_datasets <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Sample_Size <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">150</span>, <span class="dv">10</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>sim1 <span class="ot">&lt;-</span> \(n, <span class="at">mu_d =</span> <span class="fl">0.3</span>, <span class="at">sigma_d =</span> <span class="dv">1</span>) {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(n, mu_d, sigma_d) <span class="sc">|&gt;</span> <span class="fu">round</span>()</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"power4.rds"</span>)) {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  (Sample_Size <span class="sc">|&gt;</span> <span class="fu">sapply</span>(\(n) {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    n_datasets <span class="sc">|&gt;</span> <span class="fu">replicate</span>({</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      (n <span class="sc">|&gt;</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">sim1</span>() <span class="sc">|&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">t.test</span>())<span class="sc">$</span>p.value</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">|&gt;</span> <span class="fu">colMeans</span>() <span class="ot">-&gt;</span> Power</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  Power <span class="sc">|&gt;</span> <span class="fu">saveRDS</span>(<span class="st">"power4.rds"</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  Power <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"power4.rds"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Sample_Size, Power, <span class="at">type =</span> <span class="st">'l'</span>, <span class="at">col =</span> <span class="st">'purple'</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grid</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>So the optimal sample size is 100.</p>
+<p><strong>This is larger than before due to the measurement error.</strong></p>
+<section id="unbalanced-samples-1" class="level3">
+<h3 class="anchored" data-anchor-id="unbalanced-samples-1">Unbalanced samples</h3>
+<p>Suppose now that we had two independent samples of different sizes. This would occur any time we survey two different groups of people.</p>
+<p><span class="math display">\[\begin{aligned}
+x_i &amp;= \text{ before score for person }i,\ i=1:n_1 \\
+y_j &amp;= \text{ after score for person }j,\ j=1:n_2 \\
+x_i &amp;\sim roundedN(3.7, 0.9) \\
+x_j &amp;\sim roundedN(4, 1.1) \\
+\end{aligned}\]</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>n_datasets <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>Sample_Size <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">50</span>, <span class="dv">250</span>, <span class="dv">20</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sim2sample <span class="ot">&lt;-</span> \(n1, n2) {</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="fu">round</span>(<span class="fu">rnorm</span>(n1, <span class="fl">3.7</span>, <span class="fl">0.9</span>)), <span class="fu">round</span>(<span class="fu">rnorm</span>(n2, <span class="dv">4</span>, <span class="fl">1.1</span>)))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"power5.rds"</span>)) {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  Sample_Size <span class="sc">|&gt;</span> <span class="fu">sapply</span>(\(n1) {</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  (Sample_Size <span class="sc">|&gt;</span> <span class="fu">sapply</span>(\(n2) {</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    n_datasets <span class="sc">|&gt;</span> <span class="fu">replicate</span>({</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sim2sample</span>(n1, n2) <span class="ot">-&gt;</span> d_list</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">t.test</span>(d_list[[<span class="dv">1</span>]], d_list[[<span class="dv">2</span>]])<span class="sc">$</span>p.value</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">|&gt;</span> <span class="fu">colMeans</span>() }) <span class="ot">-&gt;</span> Power</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  Power <span class="sc">|&gt;</span> <span class="fu">saveRDS</span>(<span class="st">"power5.rds"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  Power <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"power5.rds"</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">range</span>(Sample_Size), <span class="fu">range</span>(Power), <span class="at">type =</span> <span class="st">'n'</span>, <span class="at">xlab =</span> <span class="fu">expression</span>(n[<span class="dv">2</span>]), <span class="at">ylab =</span> <span class="st">"Power"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grid</span>()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Power)) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(Sample_Size, Power[,i], <span class="at">col =</span> i, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'bottomright'</span>, <span class="at">legend =</span> Sample_Size, <span class="at">title =</span> <span class="fu">expression</span>(n[<span class="dv">1</span>]), <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Power))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Again we see that the measurement error lowers our power even further.</p>
+</section>
+<section id="u-test" class="level3">
+<h3 class="anchored" data-anchor-id="u-test">U test</h3>
+<p>What if we used the Mann-Whitney test instead of a t-test?</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>n_datasets <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Sample_Size <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">50</span>, <span class="dv">250</span>, <span class="dv">20</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>sim2sample <span class="ot">&lt;-</span> \(n1, n2) {</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="fu">round</span>(<span class="fu">rnorm</span>(n1, <span class="fl">3.7</span>, <span class="fl">0.9</span>)), <span class="fu">round</span>(<span class="fu">rnorm</span>(n2, <span class="dv">4</span>, <span class="fl">1.1</span>)))</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"power6.rds"</span>)) {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  Sample_Size <span class="sc">|&gt;</span> <span class="fu">sapply</span>(\(n1) {</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  (Sample_Size <span class="sc">|&gt;</span> <span class="fu">sapply</span>(\(n2) {</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    n_datasets <span class="sc">|&gt;</span> <span class="fu">replicate</span>({</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sim2sample</span>(n1, n2) <span class="ot">-&gt;</span> d_list</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">wilcox.test</span>(d_list[[<span class="dv">1</span>]], d_list[[<span class="dv">2</span>]])<span class="sc">$</span>p.value</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">|&gt;</span> <span class="fu">colMeans</span>() }) <span class="ot">-&gt;</span> Power</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  Power <span class="sc">|&gt;</span> <span class="fu">saveRDS</span>(<span class="st">"power6.rds"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  Power <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"power6.rds"</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">range</span>(Sample_Size), <span class="fu">range</span>(Power), <span class="at">type =</span> <span class="st">'n'</span>, <span class="at">xlab =</span> <span class="fu">expression</span>(n[<span class="dv">2</span>]), <span class="at">ylab =</span> <span class="st">"Power"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grid</span>()</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Power)) {</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(Sample_Size, Power[,i], <span class="at">col =</span> i, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'bottomright'</span>, <span class="at">legend =</span> Sample_Size, <span class="at">title =</span> <span class="fu">expression</span>(n[<span class="dv">1</span>]), <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Power))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There appears to be only a tiny drop in power in spite of the change in hypothesis.</p>
+</section>
+</section>
+<section id="regression" class="level1">
+<h1>Regression</h1>
+<p>Suppose now that we want to test whether gender has an effect on the change in enthusiasm, while simultaneously still assessing whether the change is meaningful in the first place. We could try the following model:</p>
+<p><span class="math display">\[\begin{aligned}
+x_i &amp;= \text{ before score for person }i \\
+y_i &amp;= \text{ after score for person }i \\
+d_i &amp;= y_i - x_i,\ i = 1\dots n \\
+d_i &amp;\sim roundedN(\mu_{d_i}, \sigma^2_d) \\
+\end{aligned}\]</span></p>
+<p>But now we assume the following relationship, where <span class="math inline">\(g_i\)</span> is a gender indicator variable with a value of 1 for female participants:</p>
+<p><span class="math display">\[\begin{aligned}
+\mu_{d_i} &amp;= 0.3 + 0.4g_i \\
+\sigma^2_d &amp;= 1
+\end{aligned}\]</span></p>
+<p>We now have two power curves and are interested in the lowest one.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>n_datasets <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>Sample_Size <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">50</span>, <span class="dv">250</span>, <span class="dv">20</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>simreg <span class="ot">&lt;-</span> \(n) {</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(n, <span class="fl">0.3</span> <span class="sc">+</span> <span class="fl">0.4</span><span class="sc">*</span><span class="fu">round</span>(<span class="fu">seq_len</span>(n)<span class="sc">/</span>(n<span class="sc">+</span><span class="dv">1</span>)), <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"power7.rds"</span>)) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  (Sample_Size <span class="sc">|&gt;</span> <span class="fu">sapply</span>(\(n) {</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    n_datasets <span class="sc">|&gt;</span> <span class="fu">replicate</span>({</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>      y <span class="ot">&lt;-</span> <span class="fu">simreg</span>(n)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>      g <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">seq_len</span>(n)<span class="sc">/</span>(n<span class="sc">+</span><span class="dv">1</span>))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>      res <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> g)))</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>      res[,<span class="dv">4</span>] <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>      }) <span class="sc">|&gt;</span> <span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">colMeans</span>()</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  })) <span class="sc">|&gt;</span> <span class="fu">t</span>() <span class="ot">-&gt;</span> Power</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  Power <span class="sc">|&gt;</span> <span class="fu">saveRDS</span>(<span class="st">"power7.rds"</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  Power <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"power7.rds"</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">range</span>(Sample_Size), <span class="fu">range</span>(Power), <span class="at">type =</span> <span class="st">'n'</span>, <span class="at">xlab =</span> <span class="fu">expression</span>(n[<span class="dv">2</span>]), <span class="at">ylab =</span> <span class="st">"Power"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grid</span>()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Power)) {</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(Sample_Size, Power[,i], <span class="at">col =</span> i, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'bottomright'</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Male vs 0"</span>, <span class="st">"Female vs Male"</span>), <span class="at">title =</span> <span class="st">"Effect"</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Power))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>While the above models are all quite simple, the principles demonstrate translate to models of higher complexity. As long as you can follow the core steps then you can estimate power or required sample size.</p>
+<p>Steps:</p>
+<ol type="1">
+<li>Write down the model mathematically,</li>
+<li>specify expected values for all parameters,</li>
+<li>simulate data sets,</li>
+<li>fit the model to each data set as if the parameters are unknown,</li>
+<li>calculate the values (usually p-values) of interest,</li>
+<li>summarise the results and interpret.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/acadseanvdm\.github\.io\/site\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

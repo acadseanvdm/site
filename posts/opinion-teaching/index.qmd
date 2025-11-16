@@ -1,0 +1,40 @@
+---
+title: "Thoughts about teaching, consultation, and research"
+author: "Sean van der Merwe"
+date: 2018-08-15
+slug: opinion-teaching
+categories:
+  - opinion
+  - teaching
+tags:
+  - opinion
+  - teaching
+---
+
+#### Q: Good vs Bad students
+
+**A:** A good student thanks the teacher for the student's own successes, a bad student blames the teacher for their own failures. I teach the ones in between.
+
+It's the average student that has the most to benefit from good teaching practices. They benefit the most from approaching the teacher for help and from the teacher taking an interest in their work. As a lecturer I focus the most on the students who try the hardest, who ask questions, who show up for class, and *reflect on what they don't know so that they know when and where to ask for help*.
+
+#### Q: Theory vs Practice
+
+**A:** Work that can be memorised and regurgitated without thought has no place in summative assessments (*e.g.* theorems have no place in exams). Theory must be taught, and it must be assessed well, but if you ask students to memorise a bunch of theory you aren't teaching them theory - you're teaching them memorisation. Instead, theory must be taught and assessed in a formative and engaging way, so that it's place as the basis for further deduction and application is cemented.
+
+#### Q: What is your teaching philosophy?
+
+**A:** Assessment directed self-learning. I explain *why* the work is important and *where* it fits in the bigger scheme. I equip them with tools and show them *how* to learn. I use assessment activities to guide students as to *when* to learn *what*.
+
+#### Q: Preparing students for the future
+
+**A:** When I was a student the focus at university was to prepare students to keep studying. If you left to go work after your degree then it was generally understood by business and the community that your degree was largely useless and only proved that you had at least a little self discipline. This is no longer acceptable (and shouldn't have been acceptable then).
+
+Instead, *we must consider where our students will be working and prepare them for that environment.* Statisticians and actuaries are going to spend about half their work days in front of a computer in general, possibly more depending on the field, so we must get them used to that idea at university. Hence, my courses are computer based. More than that, my assessments are open-book and open-internet, similar to the environment they will have at work. There is an exception: tests are still individual assessments, teaching self-reliance and problem solving (group work is done elsewhere).
+
+
+#### Q: What is different about your teaching?
+
+**A:** Homework. I'm not good at making classes exciting, but I can make assignments that challenge students. The biggest thing I do differently is that in my individual assignments every student gets different data to work on. This reduces copy-paste (but does not eliminate copying sadly). I think this is a step in the right direction, especially in statistics.
+
+
+

@@ -9,7 +9,6 @@ categories:
 tags:
   - R
   - plot
-  - interactive
 code-fold: show
 ---
 

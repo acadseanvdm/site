@@ -1,0 +1,224 @@
+---
+title: "Read and write files from R, starting with Excel files"
+author: "Sean van der Merwe"
+date: '2021-12-15'
+slug: xlsx-tips
+categories:
+  - R
+  - data
+tags:
+  - R
+  - data
+code-fold: show
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(formatR)
+opts_chunk$set(echo = TRUE, fig.width = 5, fig.height = 3, eval = FALSE, tidy.opts = list(width.cutoff = 65), tidy = TRUE)
+```
+
+# Introduction
+
+The purpose of this guide is to highlight the many ways to read and write Excel files from R, and discuss alternatives along the way.
+
+# Bad (but easy) approaches
+
+## Import Dataset button
+
+In RStudio's Environment pane there is an 'Import Dataset' button. Use this button if you are only ever going to read in the data once and are going to write less than 10 lines of code. It requires the TidyVerse to be installed.
+
+## File Chooser
+
+In Windows, R can use the file chooser to let you find and select your file.
+
+I am going to combine it with the *read.xlsx* function from the [openxlsx library](https://www.rdocumentation.org/packages/openxlsx/) to easily read in the first sheet of my Excel file.
+
+```{r}
+file.choose() |> openxlsx::read.xlsx() -> mydata
+```
+
+## Full path
+
+Another thing people like to do is put the full path to their file in the read command, primarily to bypass the 'working directory' problem. 
+
+```{r}
+"C:/Users/myusername/OneDrive - myemployer/Work_CurrentYear/Subject/Examples/ExcelFile.xlsx" |> openxlsx::read.xlsx() -> mydata
+```
+
+Note that R uses '/' to separate folders/directories (the Linux convention).
+
+## Why the above is bad
+
+The above approaches are bad because:
+
+1. Manual approaches are slow and cumbersome
+1. You will almost always want to read in the data multiple times in the long run
+1. Manual approaches cannot be checked or audited by other people
+1. So journals and reviewers will complain if they see it (and they are asking for code more and more)
+1. They are very difficult to debug
+1. Manual approaches are incompatible with reproducible research principles
+1. And it doesn't work with R Markdown knitting
+
+## The working directory issue
+
+R will look for files in the 'working directory'. In an ordinary R script this will usually be your documents folder.
+
+The best way around the working directory (folder) issue is to write all code in R Markdown notebooks instead of ordinary R scripts. This makes RStudio move your working directory around for you.
+
+If you want to use an R script then include it in an R Project to help you keep everything organised. Again, RStudio knows to look in the project folder first.
+
+You can also use a package such as 'here' to help you with this issue.
+
+Alternatively, in RStudio you can right-click on the script tab at the top, then select "Set Working Directory" to set the working directory for the current session. This is again a manual approach, which is bad (but easy).
+
+## Attaching data
+
+If you are only ever reading the data in once (say with the Import Dataset button) and you don't have too many variables, then it can be handy to 'attach' the data set, which will make the variables in the data set directly accessible by name. 
+
+This sounds great but actually causes all sorts of problems and messes in the long run. Attaching data doesn't actually turn the data into individual variables at all, which means that when you read in data twice, or try to change the data set, then it often doesn't do what you might expect.
+
+Best practice is to never attach data, there is always a better way.
+
+# Best practice
+
+*From here on I'm going to assume you are working in R Markdown or an R Project.*
+
+Always include the file name and sheet name in the code:
+
+```{r}
+"ExcelFile.xlsx" |> openxlsx::read.xlsx("MySheet") -> mydata
+```
+
+The above code can also be written as:
+
+```{r}
+mydata <- openxlsx::read.xlsx(xlsxFile = "ExcelFile.xlsx", sheet = "MySheet")
+```
+
+Or various other arrangements and levels of being explicit.
+
+## Case sensitivity and fat fingers
+
+R is extremely case sensitive (good thing). The best way to get your file name correct is to find it in your file explorer and copy the file name from there. In Windows Explorer you click on the file and press F2 (or click again) then copy the entire file name. 
+
+The best way to get your sheet name correct is to open the file in Excel, then right-click on the sheet name, choose 'Rename' and then copy the name (Ctrl+C).
+
+I recommend you close the file again before reading it into R. In most cases this is not necessary, but if the file is being live edited (*e.g.* in a OneDrive folder) then you will not be able to read it into R without closing it first.
+
+## Relative paths
+
+The really fancy approach is to organise your project files in sub folders. For example, you can create a 'DataSets' folder in your project folder and read the data from that:
+
+```{r}
+"DataSets/ExcelFile.xlsx" |> openxlsx::read.xlsx("MySheet") -> mydata
+```
+
+## More options
+
+The 'openxlsx' package is quite flexible, you can:
+
+* Read in data by sheet number (Sheet 1 is the default)
+* Read in only parts of sheets
+* Get all the sheet names and cycle through them
+* Read in data from named ranges, which means you can get exactly the values you want from anywhere in the workbook without even needing to know where the values are!
+
+## Other formats
+
+R can read in all popular data formats:
+
+* Text data (.txt or .dat usually) can be read with 'read.table' or 'readLines' from base R
+* CSV files can be read with 'read.csv', 'read.csv2', 'read.table', 'read.xlsx', or various other commands, some of which are much faster - see for example the 'data.table' package for some really fancy stuff for CSV files.
+* SAS or SPSS files (and others) can be read in via the 'haven' package.
+* The 'readr' package enables reading files directly from servers, including websites and GitHub. Some servers require special permissions though, like Google Drive for which there is the 'googledrive' package.
+* There are great SQL packages for R that help you to draw data directly from databases.
+
+## Speed
+
+'openxlsx' is the fastest way to read Excel files (faster than Excel itself). However, fastest doesn't always mean fast, especially with really large files. Large data science projects don't use Excel to store their data.
+
+As you use R more, try to learn the RDS format: 
+
+```{r}
+?saveRDS
+?readRDS
+```
+
+RDS files are generally as fast as CSV files, but smaller than XLSX files, giving the best of both!
+
+The RDS format is exclusive to R, or anything that can call on R indirectly (like SAS, PowerBI, etc.). Other programming languages have similar tools for storing data in binary formats.
+
+The best part about RDS file is that they can store anything, including models, results, plots, and so on.
+
+# Writing Excel files
+
+Often you might produce simulated data sets, or large tables that don't fit on a page, and want to write it to Excel for distribution. You can do this with the 'write.xlsx' function:
+
+```{r}
+mydata |> openxlsx::write.xlsx("NewExcelFile.xlsx")
+```
+
+The default overwrite behaviour was recently changed to FALSE. I usually override it to TRUE. 
+
+I also like to name my sheet, which I do my putting the data into a named list:
+
+```{r}
+list(MySheetName = mydata) |> openxlsx::write.xlsx("NewExcelFile.xlsx", overwrite = TRUE)
+```
+
+The advantage of a named list is that we can write a lot of sheets at once. In the next example I will simulate 100 regression data sets, one for each of 100 fictitious students, and write them to an Excel file where each student gets a sheet with their student number in the name.
+
+```{r}
+student_numbers <- 2012345678:2012345777
+n_students <- length(student_numbers)
+n_obs <- 123
+dataset_list <- lapply(seq_len(n_students), \(s) {
+  x1 <- rgamma(n_obs, 5, 2)
+  x2 <- rnorm(n_obs, 10, 3)
+  y <- 0.3*x1 + 0.4*x2 + 1.34*rnorm(n_obs)
+  data.frame(Y = y, X1 = x1, X2 = x2)
+})
+names(dataset_list) <- paste0('St', student_numbers)
+dataset_list |> openxlsx::write.xlsx("RegAssignment1.xlsx", asTable = TRUE, 
+                                     firstRow = TRUE, overwrite = TRUE)
+```
+
+## More control
+
+If you would like to do more than just write out the data then the 'openxlsx' package allows you to take finer control, to the point that you can create extremely complex workbooks programmatically. 
+
+You might start with 'wb <- createWorkbook()' to make a blank canvas, add a sheet with 'addWorksheet(wb, "SheetName", tabColour = "#FBB4AE")', and then fill it in with data and formulas, before applying styles, data validation, column widths, frozen panes, conditional formatting, and so on.
+
+For example, I use this power to create a named table in an Excel file in my OneDrive, which is then used as input for Microsoft Power Automate to perform various tasks automatically in the cloud. This could be use to perhaps send an automatic reminder every week to each person that has not yet performed a task or reached a milestone.
+
+The possibilities are endless.
+
+.
+
+.
+
+[Back to main site](https://seanvdm.co.za/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

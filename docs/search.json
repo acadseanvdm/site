@@ -42,36 +42,134 @@
     "text": "Random topics\nMy EXCEL addin with tons of useful functions like copying tables in R or LateX format, simulating many distributions, logit transforms, deleting alternating columns, etc. Must be manually placed in C:\\Users\\You\\AppData\\Roaming\\Microsoft\\Addins and then activated in EXCEL via File-&gt;Options-&gt;Addins-&gt;Go."
   },
   {
-    "objectID": "posts/2025-11-15-biplot-echart/index.html",
-    "href": "posts/2025-11-15-biplot-echart/index.html",
+    "objectID": "posts/xlsx-tips/index.html",
+    "href": "posts/xlsx-tips/index.html",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "",
+    "text": "The purpose of this guide is to highlight the many ways to read and write Excel files from R, and discuss alternatives along the way."
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#import-dataset-button",
+    "href": "posts/xlsx-tips/index.html#import-dataset-button",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "Import Dataset button",
+    "text": "Import Dataset button\nIn RStudio’s Environment pane there is an ‘Import Dataset’ button. Use this button if you are only ever going to read in the data once and are going to write less than 10 lines of code. It requires the TidyVerse to be installed."
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#file-chooser",
+    "href": "posts/xlsx-tips/index.html#file-chooser",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "File Chooser",
+    "text": "File Chooser\nIn Windows, R can use the file chooser to let you find and select your file.\nI am going to combine it with the read.xlsx function from the openxlsx library to easily read in the first sheet of my Excel file.\n\n\nCode\nfile.choose() |&gt;\n    openxlsx::read.xlsx() -&gt; mydata"
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#full-path",
+    "href": "posts/xlsx-tips/index.html#full-path",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "Full path",
+    "text": "Full path\nAnother thing people like to do is put the full path to their file in the read command, primarily to bypass the ‘working directory’ problem.\n\n\nCode\n\"C:/Users/myusername/OneDrive - myemployer/Work_CurrentYear/Subject/Examples/ExcelFile.xlsx\" |&gt;\n    openxlsx::read.xlsx() -&gt; mydata\n\n\nNote that R uses ‘/’ to separate folders/directories (the Linux convention)."
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#why-the-above-is-bad",
+    "href": "posts/xlsx-tips/index.html#why-the-above-is-bad",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "Why the above is bad",
+    "text": "Why the above is bad\nThe above approaches are bad because:\n\nManual approaches are slow and cumbersome\nYou will almost always want to read in the data multiple times in the long run\nManual approaches cannot be checked or audited by other people\nSo journals and reviewers will complain if they see it (and they are asking for code more and more)\nThey are very difficult to debug\nManual approaches are incompatible with reproducible research principles\nAnd it doesn’t work with R Markdown knitting"
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#the-working-directory-issue",
+    "href": "posts/xlsx-tips/index.html#the-working-directory-issue",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "The working directory issue",
+    "text": "The working directory issue\nR will look for files in the ‘working directory’. In an ordinary R script this will usually be your documents folder.\nThe best way around the working directory (folder) issue is to write all code in R Markdown notebooks instead of ordinary R scripts. This makes RStudio move your working directory around for you.\nIf you want to use an R script then include it in an R Project to help you keep everything organised. Again, RStudio knows to look in the project folder first.\nYou can also use a package such as ‘here’ to help you with this issue.\nAlternatively, in RStudio you can right-click on the script tab at the top, then select “Set Working Directory” to set the working directory for the current session. This is again a manual approach, which is bad (but easy)."
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#attaching-data",
+    "href": "posts/xlsx-tips/index.html#attaching-data",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "Attaching data",
+    "text": "Attaching data\nIf you are only ever reading the data in once (say with the Import Dataset button) and you don’t have too many variables, then it can be handy to ‘attach’ the data set, which will make the variables in the data set directly accessible by name.\nThis sounds great but actually causes all sorts of problems and messes in the long run. Attaching data doesn’t actually turn the data into individual variables at all, which means that when you read in data twice, or try to change the data set, then it often doesn’t do what you might expect.\nBest practice is to never attach data, there is always a better way."
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#case-sensitivity-and-fat-fingers",
+    "href": "posts/xlsx-tips/index.html#case-sensitivity-and-fat-fingers",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "Case sensitivity and fat fingers",
+    "text": "Case sensitivity and fat fingers\nR is extremely case sensitive (good thing). The best way to get your file name correct is to find it in your file explorer and copy the file name from there. In Windows Explorer you click on the file and press F2 (or click again) then copy the entire file name.\nThe best way to get your sheet name correct is to open the file in Excel, then right-click on the sheet name, choose ‘Rename’ and then copy the name (Ctrl+C).\nI recommend you close the file again before reading it into R. In most cases this is not necessary, but if the file is being live edited (e.g. in a OneDrive folder) then you will not be able to read it into R without closing it first."
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#relative-paths",
+    "href": "posts/xlsx-tips/index.html#relative-paths",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "Relative paths",
+    "text": "Relative paths\nThe really fancy approach is to organise your project files in sub folders. For example, you can create a ‘DataSets’ folder in your project folder and read the data from that:\n\n\nCode\n\"DataSets/ExcelFile.xlsx\" |&gt;\n    openxlsx::read.xlsx(\"MySheet\") -&gt; mydata"
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#more-options",
+    "href": "posts/xlsx-tips/index.html#more-options",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "More options",
+    "text": "More options\nThe ‘openxlsx’ package is quite flexible, you can:\n\nRead in data by sheet number (Sheet 1 is the default)\nRead in only parts of sheets\nGet all the sheet names and cycle through them\nRead in data from named ranges, which means you can get exactly the values you want from anywhere in the workbook without even needing to know where the values are!"
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#other-formats",
+    "href": "posts/xlsx-tips/index.html#other-formats",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "Other formats",
+    "text": "Other formats\nR can read in all popular data formats:\n\nText data (.txt or .dat usually) can be read with ‘read.table’ or ‘readLines’ from base R\nCSV files can be read with ‘read.csv’, ‘read.csv2’, ‘read.table’, ‘read.xlsx’, or various other commands, some of which are much faster - see for example the ‘data.table’ package for some really fancy stuff for CSV files.\nSAS or SPSS files (and others) can be read in via the ‘haven’ package.\nThe ‘readr’ package enables reading files directly from servers, including websites and GitHub. Some servers require special permissions though, like Google Drive for which there is the ‘googledrive’ package.\nThere are great SQL packages for R that help you to draw data directly from databases."
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#speed",
+    "href": "posts/xlsx-tips/index.html#speed",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "Speed",
+    "text": "Speed\n‘openxlsx’ is the fastest way to read Excel files (faster than Excel itself). However, fastest doesn’t always mean fast, especially with really large files. Large data science projects don’t use Excel to store their data.\nAs you use R more, try to learn the RDS format:\n\n\nCode\n`?`(saveRDS)\n`?`(readRDS)\n\n\nRDS files are generally as fast as CSV files, but smaller than XLSX files, giving the best of both!\nThe RDS format is exclusive to R, or anything that can call on R indirectly (like SAS, PowerBI, etc.). Other programming languages have similar tools for storing data in binary formats.\nThe best part about RDS file is that they can store anything, including models, results, plots, and so on."
+  },
+  {
+    "objectID": "posts/xlsx-tips/index.html#more-control",
+    "href": "posts/xlsx-tips/index.html#more-control",
+    "title": "Read and write files from R, starting with Excel files",
+    "section": "More control",
+    "text": "More control\nIf you would like to do more than just write out the data then the ‘openxlsx’ package allows you to take finer control, to the point that you can create extremely complex workbooks programmatically.\nYou might start with ‘wb &lt;- createWorkbook()’ to make a blank canvas, add a sheet with ‘addWorksheet(wb, “SheetName”, tabColour = “#FBB4AE”)’, and then fill it in with data and formulas, before applying styles, data validation, column widths, frozen panes, conditional formatting, and so on.\nFor example, I use this power to create a named table in an Excel file in my OneDrive, which is then used as input for Microsoft Power Automate to perform various tasks automatically in the cloud. This could be use to perhaps send an automatic reminder every week to each person that has not yet performed a task or reached a milestone.\nThe possibilities are endless.\n.\n.\nBack to main site"
+  },
+  {
+    "objectID": "posts/opinion-teaching/index.html",
+    "href": "posts/opinion-teaching/index.html",
+    "title": "Thoughts about teaching, consultation, and research",
+    "section": "",
+    "text": "Q: Good vs Bad students\nA: A good student thanks the teacher for the student’s own successes, a bad student blames the teacher for their own failures. I teach the ones in between.\nIt’s the average student that has the most to benefit from good teaching practices. They benefit the most from approaching the teacher for help and from the teacher taking an interest in their work. As a lecturer I focus the most on the students who try the hardest, who ask questions, who show up for class, and reflect on what they don’t know so that they know when and where to ask for help.\n\n\nQ: Theory vs Practice\nA: Work that can be memorised and regurgitated without thought has no place in summative assessments (e.g. theorems have no place in exams). Theory must be taught, and it must be assessed well, but if you ask students to memorise a bunch of theory you aren’t teaching them theory - you’re teaching them memorisation. Instead, theory must be taught and assessed in a formative and engaging way, so that it’s place as the basis for further deduction and application is cemented.\n\n\nQ: What is your teaching philosophy?\nA: Assessment directed self-learning. I explain why the work is important and where it fits in the bigger scheme. I equip them with tools and show them how to learn. I use assessment activities to guide students as to when to learn what.\n\n\nQ: Preparing students for the future\nA: When I was a student the focus at university was to prepare students to keep studying. If you left to go work after your degree then it was generally understood by business and the community that your degree was largely useless and only proved that you had at least a little self discipline. This is no longer acceptable (and shouldn’t have been acceptable then).\nInstead, we must consider where our students will be working and prepare them for that environment. Statisticians and actuaries are going to spend about half their work days in front of a computer in general, possibly more depending on the field, so we must get them used to that idea at university. Hence, my courses are computer based. More than that, my assessments are open-book and open-internet, similar to the environment they will have at work. There is an exception: tests are still individual assessments, teaching self-reliance and problem solving (group work is done elsewhere).\n\n\nQ: What is different about your teaching?\nA: Homework. I’m not good at making classes exciting, but I can make assignments that challenge students. The biggest thing I do differently is that in my individual assignments every student gets different data to work on. This reduces copy-paste (but does not eliminate copying sadly). I think this is a step in the right direction, especially in statistics."
+  },
+  {
+    "objectID": "posts/biplot-echart/index.html",
+    "href": "posts/biplot-echart/index.html",
     "title": "Drawing an interactive biplot with echarts4r",
     "section": "",
     "text": "Biplots can contain a lot of information. To dig into that information it would help if one could interact with the plot. Thus, we want to plot the information in a modern Javascript plotting standard."
   },
   {
-    "objectID": "posts/2025-11-15-biplot-echart/index.html#points",
-    "href": "posts/2025-11-15-biplot-echart/index.html#points",
+    "objectID": "posts/biplot-echart/index.html#points",
+    "href": "posts/biplot-echart/index.html#points",
     "title": "Drawing an interactive biplot with echarts4r",
     "section": "Points",
     "text": "Points\n\n\nCode\n# Creating the point data frame is easy:\nd &lt;- data.frame(x = bp$Z[,1], y = bp$Z[,2], Species = iris$Species)\n# As is plotting it:\nd |&gt; group_by(Species) |&gt; \n  e_charts(x = x, width = fig_size, height = fig_size) |&gt;\n  e_scatter(serie = y, symbol_size = 5) |&gt; \n  e_toolbox_feature(\"dataZoom\") |&gt; \n  e_tooltip(axisPointer = list(\n      type = \"cross\"\n    ))\n\n\n\n\n\n\nTry using the zoom tool to zoom in."
   },
   {
-    "objectID": "posts/2025-11-15-biplot-echart/index.html#axes",
-    "href": "posts/2025-11-15-biplot-echart/index.html#axes",
+    "objectID": "posts/biplot-echart/index.html#axes",
+    "href": "posts/biplot-echart/index.html#axes",
     "title": "Drawing an interactive biplot with echarts4r",
     "section": "Axes",
     "text": "Axes\nThose fancy axes are not so easy. Let’s reconstruct them in a new way:\n\n\nCode\ncreate_ax_df &lt;- function(bp) {\n  xu &lt;- bp$ax.one.unit[,1]\n  yu &lt;- bp$ax.one.unit[,2]\n  tkz &lt;- ceiling(bp$axes$ticks/2)\n  ax_df &lt;- data.frame(\n    X = seq_along(xu) |&gt; sapply(\\(i) {\n      seq(-tkz[i]*abs(xu[i]), tkz[i]*abs(xu[i]), abs(xu[i]))*sign(xu[i])\n    }) |&gt; c(),\n    Y = seq_along(yu) |&gt; sapply(\\(i) {\n      seq(-tkz[i]*abs(yu[i]), tkz[i]*abs(yu[i]), abs(yu[i]))*sign(yu[i])\n    }) |&gt; c(),\n    Variable = rep(bp$axes$names, tkz*2+1),\n    VarNum = rep(seq_along(bp$axes$names), tkz*2+1)\n  )\n  ProjMat &lt;- as.matrix(ax_df[, 1:2]) %*% t(bp$Lmat[, 1:2])\n  ax_df$Projection &lt;- seq_len(nrow(ax_df)) |&gt; sapply(\\(i) {\n      ProjMat[i, ax_df$VarNum[i]] * bp$sd[ax_df$VarNum[i]] + bp$means[ax_df$VarNum[i]]\n    }) |&gt; round(1)\n  ax_df\n}\nv &lt;- bp |&gt; create_ax_df() |&gt; group_by(Variable)\n\n\nThen we draw a plot of the axes:\n\n\nCode\nv |&gt;\n  e_charts(x = X, width = fig_size, height = fig_size) |&gt;\n  e_line(serie = Y) |&gt; \n  e_scatter(serie = Y)"
   },
   {
-    "objectID": "posts/2025-11-15-biplot-echart/index.html#combined",
-    "href": "posts/2025-11-15-biplot-echart/index.html#combined",
+    "objectID": "posts/biplot-echart/index.html#combined",
+    "href": "posts/biplot-echart/index.html#combined",
     "title": "Drawing an interactive biplot with echarts4r",
     "section": "Combined",
     "text": "Combined\nWe can combine it with the scatter plot:\n\n\nCode\nd |&gt; group_by(Species) |&gt; \n  e_charts(x = x, width = fig_size, height = fig_size) |&gt;\n  e_scatter(serie = y, symbol_size = 5) |&gt; \n  e_data(v, x = X) |&gt;\n  e_line(serie = Y) |&gt; \n  e_scatter(serie = Y) |&gt; \n  e_toolbox_feature(\"dataZoom\") |&gt; \n  e_tooltip(axisPointer = list(\n      type = \"cross\"\n    ))\n\n\n\n\n\n\nThe only problem is that our tooltips don’t convey any useful information 😢."
   },
   {
-    "objectID": "posts/2025-11-15-biplot-echart/index.html#tooltips",
-    "href": "posts/2025-11-15-biplot-echart/index.html#tooltips",
+    "objectID": "posts/biplot-echart/index.html#tooltips",
+    "href": "posts/biplot-echart/index.html#tooltips",
     "title": "Drawing an interactive biplot with echarts4r",
     "section": "Tooltips",
     "text": "Tooltips\nTo have nice tooltips we first create them as another dataset variable in advance, then bind them to the observations as follows:\n\n\nCode\ncreate_tooltip &lt;- function(df, digits = 3) {\n  nms &lt;- names(df)\n  d &lt;- seq_len(ncol(df)) |&gt; lapply(\\(j) {\n    if (is.numeric(df[[j]])) {x &lt;- df[[j]] |&gt; round(digits = digits)} else {x &lt;- df[[j]]}\n    paste0(nms[j], \": \", x)\n  }) |&gt; list2DF()\n  seq_len(nrow(d)) |&gt; sapply(\\(i) {\n    paste0(d[i,] |&gt; unlist(), collapse = \"&lt;br&gt;\")\n  })\n}\nd$tooltip &lt;- iris |&gt; create_tooltip()\n\n\n\n\nCode\nd |&gt; group_by(Species) |&gt; \n  e_charts(x = x, width = fig_size*1.25, height = fig_size) |&gt;\n  e_scatter(serie = y, bind = tooltip, symbol_size = 5) |&gt; \n  e_data(v, x = X) |&gt;\n  e_line(serie = Y) |&gt; \n  e_scatter(serie = Y, bind = Projection, \n            label = list(show = TRUE, formatter = \"{b}\", offset = c(10,10))) |&gt; \n  e_toolbox_feature(\"dataZoom\") |&gt; \n  e_tooltip(\n    formatter = htmlwidgets::JS(\"\n        function(params) {\n          return params.name;\n        }\n      \")\n    ) |&gt;\n  e_grid(width = \"67%\", right = \"20%\") |&gt; \n  e_legend(\n    orient = \"vertical\",   # vertical layout\n    right = \"1%\",         # position from the right\n    top = \"middle\"         # vertically centered\n  )"
@@ -109,7 +207,7 @@
     "href": "blog.html",
     "title": "Sean van der Merwe",
     "section": "",
-    "text": "Drawing an interactive biplot with echarts4r\n\n\n\nR\n\nplot\n\n\n\n\n\n\n\n\n\n2025-11-15\n\n\nSean van der Merwe\n\n\n\n\n\nNo matching items"
+    "text": "Drawing an interactive biplot with echarts4r\n\n\n\nR\n\nplot\n\n\n\n\n\n\n\n\n\n2025-11-15\n\n\nSean van der Merwe\n\n\n\n\n\n\n\n\n\n\n\n\nSimple Power Analysis\n\n\n\nR\n\nhypothesis testing\n\n\n\n\n\n\n\n\n\n2023-02-19\n\n\nSean van der Merwe\n\n\n\n\n\n\n\n\n\n\n\n\nRead and write files from R, starting with Excel files\n\n\n\nR\n\ndata\n\n\n\n\n\n\n\n\n\n2021-12-15\n\n\nSean van der Merwe\n\n\n\n\n\n\n\n\n\n\n\n\nThoughts about teaching, consultation, and research\n\n\n\nopinion\n\nteaching\n\n\n\n\n\n\n\n\n\n2018-08-15\n\n\nSean van der Merwe\n\n\n\n\n\n\n\n\n\n\n\n\nThoughts about religious issues\n\n\n\nopinion\n\nreligion\n\n\n\n\n\n\n\n\n\n2018-08-14\n\n\nSean van der Merwe\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -117,6 +215,27 @@
     "title": "Sean van der Merwe",
     "section": "",
     "text": "I am Dr Sean van der Merwe, Academic Department Head of the Department of Mathematical Statistics and Actuarial Science at the University of the Free State.\nI serve because I’m grateful. I’m grateful for the talents and opportunities given to me and wish to use them optimally, in the service of humanity. Primarily, I am grateful for the salvation granted me by Jesus Christ which fuels my spirit and drives me to give.\nI am the coordinator of the internal Statistical Consultation Unit of University of the Free State, South Africa. I also lecture Bayesian Statistics. Married to Catherine Sheares (now vdM). I used to play a lot of computer games and program for fun, now I only play a few games and only program for work (although my work is fun - what a blessing).\n \n  \n   \n  \n    \n     \n  \n  \n    \n     \n  \n  \n     scholar\n  \n  \n     orcid"
+  },
+  {
+    "objectID": "posts/opinion-religion/index.html",
+    "href": "posts/opinion-religion/index.html",
+    "title": "Thoughts about religious issues",
+    "section": "",
+    "text": "Q: What religion do you follow?\nA: Every religion on earth has leaders that try to corrupt that religion for their own gain. Sometimes they convince themselves and those around them that they are serving the greater good, but at the same time straying and leading people further from the core faith. It’s better to pick a faith and then find a group that follows that faith to the best of their ability.\n\n\nQ: So what faith do you follow?\nA: I follow Jesus Christ. I believe in his teachings and try to follow the principles he put forth. I trust him to guide and protect my soul.\n\n\nQ: Why?\nA: When I look at the world around me I see good everywhere, from the tiniest effects of quantum mechanics to the grandest scale of the universe. I see flawed people, including myself, constantly being blessed in ways they do not and cannot deserve through their own actions. If I take even a moment to think of all the ways our world could have turned out worse then I cannot help to be grateful.\nTo put it another way, I see so much good in the world that doesn’t come from the hearts of people, including people being good to each other without reason, but also nature not wiping us all out every day by chance. This good and the wonder of the world can only come from a benevolent creator that is full of such love that the love must be shared. I thus conclude that God created us both as recipients of love and as beings able to appreciate love.\nThen the next question would be, “What would a loving creator need from us?” The obvious answer is nothing. The creator doesn’t need anything from us. Sure, things would go much better for everybody if we all followed God’s will exactly, but that will not change God, only bring him joy because he loves us and wants the best for us. In all the religions I’ve encountered, the only one that truly captures this idea that God needs nothing from us is Christianity.\nCore Christianity says that God has given us everything, including salvation from ourselves. We simply need to say, “Thank you”, or we can reject it if we like. You have already received everlasting life and love for your eternal soul, just stop rejecting it and you will have a better life both on earth and ever after.\n\n\nQ: What is the meaning of life?\nA: The meaning of life is gratitude. If you are grateful for your loved ones you will treat them at least as well as you treat yourself. If you are grateful for you job you will do your best each day at work. If you are grateful for your income you will want to share some of it with those who have less. If you are grateful for your time you will make the most of the day. If you are grateful for your health you will try to maintain or improve it into the future.\n\n\nQ: So what about prosperity?\nA: While there is some correlation between gratitude and happiness, there is no one-to-one relationship between action and consequence. The bible says that even the tiniest wrongdoing theoretically deserves death, but that Jesus came to break that link, thank heavens. The bible does not say that if you do good you will directly receive more goodness back, at least not in this life. It says your actions have impact on the next life. A lot of priests say that you must donate more and more and then you’ll be rewarded, but mostly they are just trying to make themselves rich. The bible says to give in secret because you are grateful, not expecting reward or recognition.\n\n\nQ: So why do good?\nA: Because doing good is the best way to say thank you to the Lord for the love He gives you every day. The love of the Lord empowers us to love those around us and we must be grateful for that gift.\n\n\nQ: What about the contradictions between the bible and science/common sense/etc. ?\nA: The bible doesn’t contradict science, nor common sense, nor any principle that is born of goodness and gratitude. Any such contradiction is the result of people failing to understand the true message God is trying to send us through his Word. God’s message can only be understood when the bible is approached with a humble heart, not one that tries to use the bible to support an already twisted viewpoint.\nScience is about trying to understand what we see around us. What we see around us was created by God, thus science is a tool that can help us to understand God better.\nMany Christians around the world are judged harshly. Most of this is fear and ignorance. However, some of it is justified because some Christians stick to an arrogant interpretation of the Word even when God tells them clearly that they are mistaken.\n\n\nQ: So what is the right interpretation?\nA: The one that increases the love in the world and spreads God’s love into more hearts."
+  },
+  {
+    "objectID": "posts/simple-power-analysis/index.html",
+    "href": "posts/simple-power-analysis/index.html",
+    "title": "Simple Power Analysis",
+    "section": "",
+    "text": "Assume the following:\nI will be running a workshop called “Stats is fun” for a small number of participants. Before the workshop I will ask the participants “How enthusiastic are you about statistics?” and give them a scale from 1 to 5. Afterwards, I will ask the same people the same question and compare the responses."
+  },
+  {
+    "objectID": "posts/simple-power-analysis/index.html#two-sample-versus-paired-sample",
+    "href": "posts/simple-power-analysis/index.html#two-sample-versus-paired-sample",
+    "title": "Simple Power Analysis",
+    "section": "Two sample versus Paired sample",
+    "text": "Two sample versus Paired sample\nLet us compare the paired data example above with what happens when the data isn’t matched correctly.\nSuppose I forgot to ask each person for a unique identifier, so we still have the same sized samples but no longer paired. To make this a fair comparison, we keep the other factors the same.\nTo be realistic we incorporate some correlation between the responses for the case where we are able to partially line up the responses.\n\\[\\begin{aligned}\nx_i &= \\text{ before score for person }i \\\\\ny_i &= \\text{ after score for person }i \\\\\n[x_i\\ y_i] &\\sim N_2([3.7\\ 4], [1\\ \\rho; \\rho\\ 1]) \\\\\n\\end{aligned}\\]\n\n\nCode\nn_datasets &lt;- 2000\nSample_Size &lt;- seq(50, 250, 20)\nsim2 &lt;- \\(n, rho = 0.5, mu = c(3.7, 4), sigma = matrix(c(1, rho, rho, 1), 2)) {\n  MASS::mvrnorm(n, mu, sigma)\n}\nrho_seq &lt;- seq(0.1,0.9,0.2)\n\n\n\n\nCode\nif (!file.exists(\"power2.rds\")) {\n  rho_seq |&gt; sapply(\\(rho) {\n  (Sample_Size |&gt; sapply(\\(n) {\n    n_datasets |&gt; replicate({\n      n |&gt; sim2(rho) -&gt; d_mat\n      t.test(d_mat[,1], d_mat[,2])$p.value\n    })\n  }) &lt; 0.05) |&gt; colMeans() }) -&gt; Power\n  Power |&gt; saveRDS(\"power2.rds\")\n} else {\n  Power &lt;- readRDS(\"power2.rds\")\n}\n\n\n\n\nCode\nplot(range(Sample_Size), range(Power), type = 'n', xlab = \"Sample Size\", ylab = \"Power\")\ngrid()\nfor (i in 1:ncol(Power)) {\n  lines(Sample_Size, Power[,i], col = i, lwd = 3)\n}\nlegend('bottomright', legend = rho_seq, title = expression(rho), lwd = 3, col = 1:ncol(Power))\n\n\n\n\n\n\n\n\n\nWe note that only as the correlation approaches 1 (unrealistic) do we approach the same power we had as with the paired data. Paired data is more powerful.\n\nUnbalanced samples\nSuppose now that instead of balanced samples with correlation, we had two independent samples of different sizes. This would occur any time we survey two different groups of people.\n\\[\\begin{aligned}\nx_i &= \\text{ before score for person }i,\\ i=1:n_1 \\\\\ny_j &= \\text{ after score for person }j,\\ j=1:n_2 \\\\\nx_i &\\sim N(3.7, 0.9) \\\\\nx_j &\\sim N(4, 1.1) \\\\\n\\end{aligned}\\]\n\n\nCode\nn_datasets &lt;- 2000\nSample_Size &lt;- seq(50, 250, 20)\nsim2sample &lt;- \\(n1, n2) {\n  list(rnorm(n1, 3.7, 0.9), rnorm(n2, 4, 1.1))\n}\n\n\n\n\nCode\nif (!file.exists(\"power3.rds\")) {\n  Sample_Size |&gt; sapply(\\(n1) {\n  (Sample_Size |&gt; sapply(\\(n2) {\n    n_datasets |&gt; replicate({\n      sim2sample(n1, n2) -&gt; d_list\n      t.test(d_list[[1]], d_list[[2]])$p.value\n    })\n  }) &lt; 0.05) |&gt; colMeans() }) -&gt; Power\n  Power |&gt; saveRDS(\"power3.rds\")\n} else {\n  Power &lt;- readRDS(\"power3.rds\")\n}\n\n\n\n\nCode\nplot(range(Sample_Size), range(Power), type = 'n', xlab = expression(n[2]), ylab = \"Power\")\ngrid()\nfor (i in 1:ncol(Power)) {\n  lines(Sample_Size, Power[,i], col = i, lwd = 3)\n}\nlegend('bottomright', legend = Sample_Size, title = expression(n[1]), lwd = 3, col = 1:ncol(Power))\n\n\n\n\n\n\n\n\n\nWe now see that we need the smaller sample size to be larger than the combined sample size in the paired case to get close to the same power."
   },
   {
     "objectID": "publications.html",

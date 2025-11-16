@@ -2,7 +2,11 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/2025-11-15-biplot-echart/index.html"
+      "/posts/biplot-echart/index.html",
+      "/posts/simple-power-analysis/index.html",
+      "/posts/xlsx-tips/index.html",
+      "/posts/opinion-teaching/index.html",
+      "/posts/opinion-religion/index.html"
     ]
   }
 ]
