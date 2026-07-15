@@ -1,0 +1,69 @@
+---
+title: "Some shiny apps developed by Sean"
+author: "Sean van der Merwe"
+date: '2026-07-15'
+slug: shiny-apps
+categories:
+  - R
+  - data
+tags:
+  - R
+  - data
+code-fold: show
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(formatR)
+opts_chunk$set(echo = TRUE, fig.width = 5, fig.height = 3, eval = FALSE, tidy.opts = list(width.cutoff = 65), tidy = TRUE)
+```
+
+# Introduction
+
+The purpose of this page is to link some of my favourite R Shiny apps that I have developed. Most of these were developed some time ago but are likely still relevant and useful.
+
+# Fun apps
+
+When I was young we played a competitive card game that targets the number 24. Access my implementation by clicking the link here: [Arithmetic Game](https://seanvdm.co.za/shiny/arithmeticgame/)
+
+It has full solution generation and card rating based on the number of solutions.
+
+# Statistics study apps
+
+[This app allows for easy and flexible visualisation of about 17 standard statistical densities](https://seanvdm.co.za/shiny/exploredists1/).
+
+[This app generates endless basic hypothesis testing problems and solutions](https://seanvdm.co.za/shiny/hypothesistest/). It is ideal for students in their first course of hypothesis testing. No guarantees of perfect alignment with your course terminology, but great for training the basics. 
+
+[This app is meant to be fun for time series course students wanting to test their visual analysis skills](https://seanvdm.co.za/shiny/timeseriespractice1/). It generates a time series with varied properties and challenges you to identify those properties visually.
+
+[This old app is a basic quiz on practical Bayes topics](https://seanvdm.co.za/shiny/quizapp1/). It is not perfect but good for challenging yourself in a Bayes course to see which topics you are following best. 
+
+.
+
+.
+
+[Back to main site](https://seanvdm.co.za/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

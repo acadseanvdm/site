@@ -21,10 +21,12 @@ about:
 
 ::: {#hero-heading}
 
-I am Dr Sean van der Merwe, Academic Department Head of the [Department of Mathematical Statistics and Actuarial Science](https://www.ufs.ac.za/mathstats) at the [University of the Free State](https://www.ufs.ac.za/).
+I am Prof Sean van der Merwe, Academic Department Head of the [Department of Mathematical Statistics and Actuarial Science](https://www.ufs.ac.za/mathstats) at the [University of the Free State](https://www.ufs.ac.za/).
 
 I serve because I’m grateful. I’m grateful for the talents and opportunities given to me and wish to use them optimally, in the service of humanity. Primarily, I am grateful for the salvation granted me by Jesus Christ which fuels my spirit and drives me to give.
 
-I am the coordinator of the internal Statistical Consultation Unit of University of the Free State, South Africa. I also lecture Bayesian Statistics. Married to Catherine Sheares (now vdM). I used to play a lot of computer games and program for fun, now I only play a few games and only program for work (although my work is fun - what a blessing).
+I am the coordinator of the internal Statistical Consultation Unit of University of the Free State, South Africa. In this role I get to work with people from all faculties and all levels of the university. It is the most fun and exciting part of my work. I also lecture Bayesian Statistics, my research speciality. 
+
+Married to Catherine Sheares (now vdM) with one son. I used to play a lot of computer games and program for fun, now I only play a few games and only program for work (although my work is fun - what a blessing).
 
 :::
