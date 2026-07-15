@@ -5,10 +5,12 @@ date: '2026-07-15'
 slug: shiny-apps
 categories:
   - R
-  - data
+  - learning
+  - fun
 tags:
   - R
-  - data
+  - learning
+  - fun
 code-fold: show
 ---
 
