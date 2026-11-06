@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/biplot-robust/index.html",
       "/posts/shiny-apps/index.html",
       "/posts/biplot-echart/index.html",
       "/posts/simple-power-analysis/index.html",
